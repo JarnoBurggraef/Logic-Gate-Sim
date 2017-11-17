@@ -62,9 +62,8 @@ class Gate {
 
   void paintCable() {
     if (pointerIndex>=0) {
-      fill(0);
       if (output) {
-        fill(255, 30, 10);
+        stroke(255, 30, 10);
       }
       Gate dest = list.get(pointerIndex);
       if (outTop) {
@@ -72,6 +71,7 @@ class Gate {
       } else {
         line(x+xsize-15, y+ysize/2, dest.x+15, dest.y+90);
       }
+      stroke(0);
     }
   }
   void work() {

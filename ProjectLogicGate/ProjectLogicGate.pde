@@ -4,10 +4,8 @@ int mouseXoff, mouseYoff, lockedItem, linedItem, linex, liney;
 boolean locked, lined, changed;
 
 void setup() {
-  size(1000, 500);
+  size(1000, 800);
   list = new ArrayList<Gate>();
-  a = new Gate(10, 10, "and");
-  list.add(a);
   a = new Gate(10, 150, "or");
   list.add(a);
   a = new Gate(10, 300, "schalter");
@@ -28,6 +26,7 @@ void setup() {
 void draw() {
   clear();
   background(200);
+  toolbar();
   if (locked) {
     Gate a = list.get(lockedItem);
     a.x=mouseX-mouseXoff;
