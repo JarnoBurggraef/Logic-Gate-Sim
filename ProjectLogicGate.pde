@@ -10,11 +10,11 @@ void setup() {
   list.add(a);
   a = new Gate(10, 150, "or");
   list.add(a);
+  a = new Gate(10, 300, "schalter");
+  list.add(a);
   a = new Gate(10, 350, "schalter");
   list.add(a);
-  a = new Gate(10, 400, "schalter");
-  list.add(a);
-  a = new Gate(10, 450, "lamp");
+  a = new Gate(10, 400, "lamp");
   list.add(a);
   println(list.size(), ":");
   for (Gate a : list) {
@@ -110,10 +110,11 @@ class Gate {
         output=inTop;
       }
       if (outTop) {
-        dest.inTop=true;
+        dest.inTop=output;
       } else {
-        dest.inBottom=true;
+        dest.inBottom=output;
       }
+      dest.work();
     }
   }
 }
