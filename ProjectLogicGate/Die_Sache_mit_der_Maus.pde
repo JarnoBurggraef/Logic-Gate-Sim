@@ -33,7 +33,7 @@ void mousePressed() {
           a = new Gate(265, 80, "lamp");
           break;
         case "not": 
-          a = new Gate(380, 20, "not");
+          a = new Gate(380, 20, "not"); a.work();
           break;
         }
         a.move=true;
