@@ -6,13 +6,13 @@ boolean locked, lined, changed;
 void setup() {
   size(1000, 800);
   list = new ArrayList<Gate>();
-  a = new Gate(10, 150, "or");
-  list.add(a);
-  a = new Gate(10, 300, "schalter");
+  a = new Gate(10, 200, "or");
   list.add(a);
   a = new Gate(10, 350, "schalter");
   list.add(a);
-  a = new Gate(10, 400, "lamp");
+  a = new Gate(10, 400, "schalter");
+  list.add(a);
+  a = new Gate(10, 450, "lamp");
   list.add(a);
   println(list.size(), ":");
   for (Gate a : list) {
