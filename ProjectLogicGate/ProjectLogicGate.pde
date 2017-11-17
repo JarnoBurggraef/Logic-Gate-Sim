@@ -9,7 +9,8 @@ void setup() {
   a = new Gate(20, 20, "and");
   a.toolbar=true;
   list.add(a);
-  a = new Gate(10, 350, "or");
+  a = new Gate(140, 20, "or");
+   a.toolbar=true;
   list.add(a);
   /*a = new Gate(10, 400, "schalter");
   list.add(a);

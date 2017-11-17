@@ -19,7 +19,18 @@ void mousePressed() {
     if (inside(gate.x, gate.y, gate.x+gate.xsize, gate.y+gate.ysize)) {
       locked = true;
       if (gate.toolbar) {
-        a = new Gate(20, 20, "and");
+        switch(gate.type) {
+        case "and": 
+          a = new Gate(20, 20, "and");
+        case "or": 
+          a = new Gate(140, 20, "or");
+        case "schalter": 
+          a = new Gate(260, 20, "schalter");
+        case "lamp": 
+          a = new Gate(380, 20, "lamp");
+        case "not": 
+          a = new Gate(485, 20, "not");
+        }
         a.move=true;
         mouseXoff=mouseX-a.x;
         mouseYoff=mouseY-a.y;
