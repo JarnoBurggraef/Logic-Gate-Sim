@@ -1,6 +1,6 @@
 void toolbar() {  
   fill(100);
-  rect(0, 0, width, 200);
+  rect(0, 0, width, 160);
   //and
   fill(255);
   rect(20, 20, 100, 120);
