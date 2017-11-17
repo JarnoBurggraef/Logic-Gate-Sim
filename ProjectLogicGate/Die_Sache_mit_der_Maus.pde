@@ -2,14 +2,12 @@ void mousePressed() {
   if (mouseY<140) {
     if (inside(20, 20, 120, 140)) {
       locked = true;
-      a = new Gate(20, 180, "and");
+      a = new Gate(20, 20, "and");
+      a.move=true;
+      mouseXoff=mouseX-a.x;
+      mouseYoff=mouseY-a.y;
       list.add(a);
-      //println("locked");
-      gate.move=true;
-      lockedItem = i;
-      mouseXoff=mouseX-gate.x;
-      mouseYoff=mouseY-gate.y;
-      break;
+      lockedItem = list.size()-1;
     }
   } else {
     for (int i = list.size()-1; i>=0; i--) { 
