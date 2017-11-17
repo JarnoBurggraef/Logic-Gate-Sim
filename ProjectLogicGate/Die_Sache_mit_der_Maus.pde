@@ -30,10 +30,10 @@ void mousePressed() {
           a = new Gate(260, 20, "schalter");
           break;
         case "lamp": 
-          a = new Gate(380, 20, "lamp");
+          a = new Gate(265, 80, "lamp");
           break;
         case "not": 
-          a = new Gate(485, 20, "not");
+          a = new Gate(380, 20, "not");
           break;
         }
         a.move=true;
@@ -82,6 +82,12 @@ void mouseReleased() {
         break;
       } else if (gate.type.equals("lamp")) { 
         if (inside(gate.x+5, gate.y+20, gate.x+25, gate.y+40)) {
+          source.pointerIndex=i;
+          source.outTop=true;
+          break;
+        }
+      } else if (gate.type.equals("not")) { 
+        if (inside(gate.x+5, gate.y+30, gate.x+25, gate.y+50)) {
           source.pointerIndex=i;
           source.outTop=true;
           break;

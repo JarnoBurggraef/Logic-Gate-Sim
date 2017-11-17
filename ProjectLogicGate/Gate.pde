@@ -13,7 +13,10 @@ class Gate {
       xsize=100;
       ysize=30;
     } else if (type.equals("lamp")) {
-      xsize=85;
+      xsize=90;
+      ysize=60;
+    } else if (type.equals("not")) {
+      xsize=80;
       ysize=60;
     }
     pointerIndex=-1;
@@ -33,8 +36,9 @@ class Gate {
     //Gatterfläche
     rect(x, y, xsize, ysize);
     //Outputfläche
-    if(!type.equals("lamp")){
-    rect(x+xsize-25, y+ysize/2-10, 20, 20);}
+    if (!type.equals("lamp")) {
+      rect(x+xsize-25, y+ysize/2-10, 20, 20);
+    }
     //Inputflächen
     if (type.equals("and")) {
       rect(x+5, y+20, 20, 20);
@@ -53,9 +57,14 @@ class Gate {
     } else if (type.equals("lamp")) {
       if (inTop)fill(0, 255, 0);
       else fill(255, 0, 0);
-      rect(x+30, y+5, 50, 50);
+      rect(x+35, y+5, 50, 50);
       fill(255);
       rect(x+5, y+20, 20, 20);
+    } else if (type.equals("not")) {
+      rect(x+5, y+20, 20, 20);
+      ellipse(x+90, y+30, 20, 20);
+      fill(0);
+      text("1", x+33, y+30);
     }
     stroke(0);
   }
@@ -83,6 +92,8 @@ class Gate {
         output=inTop||inBottom;
       } else if (type.equals("schalter")) {
         output=inTop;
+      } else if (type.equals("not")) {
+        output=!inTop;
       }
       if (outTop) {
         dest.inTop=output;

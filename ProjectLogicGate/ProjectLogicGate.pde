@@ -15,7 +15,10 @@ void setup() {
   a = new Gate(260, 20, "schalter");
   a.toolbar=true;
   list.add(a);
-  a = new Gate(380, 20, "lamp");
+  a = new Gate(265, 80, "lamp");
+  a.toolbar=true;
+  list.add(a);
+  a = new Gate(380, 20, "not");
   a.toolbar=true;
   list.add(a);
   println(list.size(), ":");
