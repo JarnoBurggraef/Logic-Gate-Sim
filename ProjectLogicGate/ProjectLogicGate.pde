@@ -6,7 +6,7 @@ boolean locked, lined, changed;
 void setup() {
   size(1000, 800);
   list = new ArrayList<Gate>();
-  a = new Gate(10, 200, "or");
+ /* a = new Gate(10, 200, "or");
   list.add(a);
   a = new Gate(10, 350, "schalter");
   list.add(a);
@@ -17,7 +17,7 @@ void setup() {
   println(list.size(), ":");
   for (Gate a : list) {
     println(a.type);
-  }
+  }*/
   textSize(25);
 }
 
