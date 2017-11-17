@@ -10,16 +10,18 @@ void setup() {
   a.toolbar=true;
   list.add(a);
   a = new Gate(140, 20, "or");
-   a.toolbar=true;
+  a.toolbar=true;
   list.add(a);
-  /*a = new Gate(10, 400, "schalter");
+  a = new Gate(260, 20, "schalter");
+  a.toolbar=true;
   list.add(a);
-  a = new Gate(10, 450, "lamp");
+  a = new Gate(380, 20, "lamp");
+  a.toolbar=true;
   list.add(a);
   println(list.size(), ":");
   for (Gate a : list) {
     println(a.type);
-  }*/
+  }
   textSize(25);
 }
 
