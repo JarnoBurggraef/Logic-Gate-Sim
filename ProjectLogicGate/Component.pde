@@ -1,5 +1,5 @@
 ArrayList<Component> allComponents = new ArrayList<Component>();
-class Component {
+abstract class Component {
   int x, y, xsize, ysize;
   
   boolean isMoving = false;
@@ -23,12 +23,28 @@ class Component {
     y = height/2;
   }
   
-  void Paint(){
-    
+  color getEdgeColor(){
+    return isMoving ? color(255,0,0) : color(0);
+  }
+  void drawBackground(){
+    fill(255);
+    stroke(getEdgeColor());
+    rect(x,y,xsize,ysize);
   }
   
-  void Work(){
-    
+  abstract void Paint();
+  
+  abstract void Work();
+  
+  void TransmitOutput(){
+    for (int i=0;i<outputComponents.length; i++){
+      Component c = outputComponents[i];
+      if (c!=null){
+        c.inputs[outputComponentsIndices[i]] = outputs[i];
+        c.Work();
+      }
+      //println("ERROR: No output-component for "+this+" at index " + i+" specified");
+    }
   }
   
   void setupIO(){
@@ -38,5 +54,12 @@ class Component {
     outputs = new boolean[outputSize];  
     outputComponentsIndices = new int[outputSize];
   }
-  
+}
+
+void WorkAllComponents(){
+  for (Component c : allComponents){
+    if (c instanceof Schalter){
+      c.Work();
+    }
+  }
 }
