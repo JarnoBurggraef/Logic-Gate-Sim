@@ -6,11 +6,12 @@ boolean locked, lined, changed;
 void setup() {
   size(1000, 800);
   list = new ArrayList<Gate>();
- /* a = new Gate(10, 200, "or");
+  a = new Gate(20, 20, "and");
+  a.toolbar=true;
   list.add(a);
-  a = new Gate(10, 350, "schalter");
+  a = new Gate(10, 350, "or");
   list.add(a);
-  a = new Gate(10, 400, "schalter");
+  /*a = new Gate(10, 400, "schalter");
   list.add(a);
   a = new Gate(10, 450, "lamp");
   list.add(a);

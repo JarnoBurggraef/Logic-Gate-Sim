@@ -1,41 +1,41 @@
 void mousePressed() {
-  if (mouseY<140) {
-    if (inside(20, 20, 120, 140)) {
-      locked = true;
-      a = new Gate(20, 20, "and");
-      a.move=true;
-      mouseXoff=mouseX-a.x;
-      mouseYoff=mouseY-a.y;
-      list.add(a);
-      lockedItem = list.size()-1;
+  /*if (mouseY<140) {
+   if (inside(20, 20, 120, 140)) {
+   locked = true;
+   a = new Gate(20, 20, "and");
+   a.move=true;
+   mouseXoff=mouseX-a.x;
+   mouseYoff=mouseY-a.y;
+   list.add(a);
+   lockedItem = list.size()-1;
+   }
+   } else {*/
+  for (int i = list.size()-1; i>=0; i--) { 
+    Gate gate = list.get(i);
+    if(gate.toolbar)continue;
+    ///////////////////////////////
+    if (inside(gate.x+gate.xsize-25, gate.y+gate.ysize/2-10, gate.x+gate.xsize-5, gate.y+gate.ysize/2+10)) {
+      lined = true;
+      linex=mouseX;
+      liney=mouseY;
+      linedItem=i;
+      break;
+    }////////////////////////////
+    if (gate.type.equals("schalter")) {
+      if (inside(gate.x+5, gate.y+5, gate.x+45, gate.y+25)) {
+        gate.inTop^=true;
+        break;
+      }
     }
-  } else {
-    for (int i = list.size()-1; i>=0; i--) { 
-      Gate gate = list.get(i);
-      ///////////////////////////////
-      if (inside(gate.x+gate.xsize-25, gate.y+gate.ysize/2-10, gate.x+gate.xsize-5, gate.y+gate.ysize/2+10)) {
-        lined = true;
-        linex=mouseX;
-        liney=mouseY;
-        linedItem=i;
-        break;
-      }////////////////////////////
-      if (gate.type.equals("schalter")) {
-        if (inside(gate.x+5, gate.y+5, gate.x+45, gate.y+25)) {
-          gate.inTop^=true;
-          break;
-        }
-      }
-      //////////////////////////////
-      if (inside(gate.x, gate.y, gate.x+gate.xsize, gate.y+gate.ysize)) {
-        locked = true;
-        //println("locked");
-        gate.move=true;
-        lockedItem = i;
-        mouseXoff=mouseX-gate.x;
-        mouseYoff=mouseY-gate.y;
-        break;
-      }
+    //////////////////////////////
+    if (inside(gate.x, gate.y, gate.x+gate.xsize, gate.y+gate.ysize)) {
+      locked = true;
+      //println("locked");
+      gate.move=true;
+      lockedItem = i;
+      mouseXoff=mouseX-gate.x;
+      mouseYoff=mouseY-gate.y;
+      break;
     }
   }
 }
@@ -58,6 +58,7 @@ void mouseReleased() {
     source.pointerIndex=-1;
     for (int i = list.size()-1; i>=0; i--) {
       Gate gate = list.get(i);
+      if(gate.toolbar)continue;
       if (inside(gate.x+5, gate.y+20, gate.x+25, gate.y+40)) {
         source.pointerIndex=i;
         source.outTop=true;

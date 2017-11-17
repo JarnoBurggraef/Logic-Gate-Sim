@@ -1,7 +1,7 @@
 class Gate {
   String type;
   int pointerIndex, x, y, xsize, ysize;
-  boolean move, inTop, inBottom, outTop, output;  //inTop ist auch der Eingang für NOTs oder die Schalter
+  boolean move, inTop, inBottom, outTop, output, toolbar;  //inTop ist auch der Eingang für NOTs oder die Schalter
   Gate(int xpos, int ypos, String newType) {
     x=xpos;
     y=ypos;
