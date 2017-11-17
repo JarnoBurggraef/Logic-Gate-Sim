@@ -21,15 +21,20 @@ void mousePressed() {
       if (gate.toolbar) {
         switch(gate.type) {
         case "and": 
-          a = new Gate(20, 20, "and");
+          a = new Gate(20, 20, "and"); 
+          break;
         case "or": 
           a = new Gate(140, 20, "or");
+          break;
         case "schalter": 
           a = new Gate(260, 20, "schalter");
+          break;
         case "lamp": 
           a = new Gate(380, 20, "lamp");
+          break;
         case "not": 
           a = new Gate(485, 20, "not");
+          break;
         }
         a.move=true;
         mouseXoff=mouseX-a.x;
