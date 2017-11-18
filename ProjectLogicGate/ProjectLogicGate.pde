@@ -140,7 +140,6 @@ void load2() {
   println("There are " + read.length + " obects in the save file.");
   for ( int i=0; i<read.length; i++) {
     String[] data = split(read[i], ',');
-    // println(data[0]);
     Component u;
     switch(data[0]) {
     case "and":
