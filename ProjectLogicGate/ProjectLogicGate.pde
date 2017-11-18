@@ -6,6 +6,7 @@ Component activeComponent;
 //ArrayList<Gate> list;
 int mouseXoff, mouseYoff, lockedItem, lineStartIndex, linex, liney;
 boolean locked, drawLine, changed;
+String gateType;
 Component lineStart;
 ArrayList<Component> allComponents = new ArrayList<Component>();
 
@@ -65,59 +66,75 @@ void setup() {
   t = new Splitter(620, 20);
   t.toolbar = true;
 
-
   textSize(25);
 }
 
-void save() {
-  FileOutputStream fout = null;
-  ObjectOutputStream oos = null;
+/*void save() {
+ FileOutputStream fout = null;
+ ObjectOutputStream oos = null;
+ 
+ try {
+ fout = new FileOutputStream(path("data.txt"));
+ oos = new ObjectOutputStream(fout);
+ oos.writeObject(allComponents);
+ 
+ System.out.println("Done");
+ } 
+ catch (Exception ex) {
+ 
+ ex.printStackTrace();
+ } 
+ finally {
+ 
+ if (fout != null) {
+ try {
+ fout.close();
+ } 
+ catch (IOException e) {
+ e.printStackTrace();
+ }
+ }
+ 
+ if (oos != null) {
+ try {
+ oos.close();
+ } 
+ catch (IOException e) {
+ e.printStackTrace();
+ }
+ }
+ }
+ }*/
 
-  try {
-    fout = new FileOutputStream(path("data.txt"));
-    oos = new ObjectOutputStream(fout);
-    oos.writeObject(allComponents);
+void save2() {
+  String[] savedObjects = new String[allComponents.size()];
+  for (int i=0; i<allComponents.size()-1; i++) {
+    Component d = allComponents.get(i);
+    if (d.toolbar) continue;
 
-    System.out.println("Done");
-  } 
-  catch (Exception ex) {
-
-    ex.printStackTrace();
-  } 
-  finally {
-
-    if (fout != null) {
-      try {
-        fout.close();
-      } 
-      catch (IOException e) {
-        e.printStackTrace();
-      }
-    }
-
-    if (oos != null) {
-      try {
-        oos.close();
-      } 
-      catch (IOException e) {
-        e.printStackTrace();
-      }
-    }
+    if (d instanceof Splitter) gateType="splitter";
+    else if (d instanceof AndGate)  gateType="and";
+    else if (d instanceof OrGate)  gateType="or";
+    else if (d instanceof NotGate)  gateType="not";
+    else if (d instanceof Schalter)  gateType="schalter";
+    else if (d instanceof Lampe)  gateType="lampe";
+    savedObjects[i]=gateType+","+d.x+","+d.y+",";
   }
+  saveStrings("save.txt", savedObjects);
 }
-void load() {
-  try {
-    ObjectInputStream ois = new ObjectInputStream(new FileInputStream(path("data.txt")));
-
-    ArrayList<Component> allComponents = (ArrayList<Component>) ois.readObject();
-    println(allComponents.size());
-    print("succes");
-    ois.close();
-  } 
-  catch (Exception ex) {
-    ex.printStackTrace();
-  }
-}
+/*void load() {
+ try {
+ ObjectInputStream ois = new ObjectInputStream(new FileInputStream(path("data.txt")));
+ 
+ ArrayList<Component> allComponents = (ArrayList<Component>) ois.readObject();
+ println(allComponents.size());
+ print("succes");
+ ois.close();
+ } 
+ catch (Exception ex) {
+ ex.printStackTrace();
+ }
+ }*/
 void load2() {
   String[] read = loadStrings("save.txt");
   println("There are " + read.length + " obects in the save file.");
