@@ -1,4 +1,5 @@
 void mousePressed() {
+  save();
   for (int i = allComponents.size()-1; i>=0; i--) { 
     Component component = allComponents.get(i);
     ///////////////////////////////

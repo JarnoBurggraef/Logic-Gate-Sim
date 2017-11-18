@@ -1,5 +1,8 @@
-ArrayList<Component> allComponents = new ArrayList<Component>();
-class Component {
+import java.io.Serializable;
+import processing.core.*;
+import static processing.core.PApplet.*;
+
+class Component implements Serializable{
   int x, y, xsize, ysize;
   
   boolean isMoving = false;
@@ -16,24 +19,28 @@ class Component {
   boolean[] outputs;
   int outputSize;
   
+  transient PApplet sketch;
+  
   Component(int _x, int _y){
     x = _x;
     y = _y;
-    if (!allComponents.contains(this)){
-      allComponents.add(this);
+    sketch  = ProjectLogicGate.sketch;
+    ProjectLogicGate main = (ProjectLogicGate)sketch;
+    if (!main.allComponents.contains(this)){
+      main.allComponents.add(this);
     }
   }
   Component(){
-    this(width/2,height/2);
+    this(0,0);
   }
   
-  color getEdgeColor(){
-    return isMoving ? color(255,0,0) : color(0);
+  int getEdgeColor(){
+    return isMoving ? sketch.color(255,0,0) : sketch.color(0);
   }
   void DrawBackground(){
-    fill(255);
-    stroke(getEdgeColor());
-    rect(x,y,xsize,ysize);
+    sketch.fill(255);
+    sketch.stroke(getEdgeColor());
+    sketch.rect(x,y,xsize,ysize);
   }
   
   void Paint(){}
@@ -47,37 +54,37 @@ class Component {
   
   int[] getCableEndPos(int index, int row){
     int _x = row == 0 ? x+5 : x+xsize-25;
-    int _y = y+(int)(ysize*(float(index+1)/((row==0 ? inputSize : outputSize)+1))) -10; 
+    int _y = y+(int)(ysize*((float)(index+1)/((row==0 ? inputSize : outputSize)+1))) -10; 
     return new int[]{_x,_y};
 }
   
   void DrawIO(){
-    fill(255);
-    stroke(getEdgeColor());
+    sketch.fill(255);
+    sketch.stroke(getEdgeColor());
     for (int i = 0; i<inputSize;i++){
       int[] pos = getCableEndPos(i,0);
-      rect(pos[0],pos[1],20,20);
+      sketch.rect(pos[0],pos[1],20,20);
     }
     
     for (int i = 0; i<outputSize;i++){
       int[] pos = getCableEndPos(i,1);
-      rect(pos[0],pos[1],20,20);
+      sketch.rect(pos[0],pos[1],20,20);
     }
     
   }
   void DrawCables(){
     for (int i = 0; i<outputComponents.length;i++){
       if (outputs[i]) {
-        stroke(255, 30, 10);
+        sketch.stroke(255, 30, 10);
       } else {
-        stroke(0);
+        sketch.stroke(0);
       }
       if (outputComponents[i]==null) continue;
       int[] start = getCableEndPos(i,1);
       int[] end = outputComponents[i].getCableEndPos(outputComponentsIndices[i],0);
-      line(start[0]+10,start[1]+10,end[0]+10,end[1]+10);
+      sketch.line(start[0]+10,start[1]+10,end[0]+10,end[1]+10);
     }
-    stroke(0);
+    sketch.stroke(0);
   }
   
   void TransmitOutput(){
@@ -99,21 +106,4 @@ class Component {
     outputComponentsIndices = new int[outputSize];
   }
   
-}
-
-void WorkAllComponents(){
-  for (Component c : allComponents){
-    if (c instanceof Schalter){
-      c.Work();
-    }
-  }
-}
-
-void DrawAllComponents(){
-  for (Component c : allComponents){
-    c.Paint();
-  }
-  for (Component c : allComponents){
-    c.DrawCables();
-  }
 }
