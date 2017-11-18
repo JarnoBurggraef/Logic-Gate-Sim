@@ -127,7 +127,6 @@ void WorkAllComponents(){
 
 void DrawAllComponents(){
   for (Component c : allComponents){
-    println(c.x);
     c.Paint();
   }
   for (Component c : allComponents){
