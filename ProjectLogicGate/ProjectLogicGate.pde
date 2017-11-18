@@ -107,8 +107,9 @@ void setup() {
  }*/
 
 void save2() {
-  String[] savedObjects = new String[allComponents.size()];
-  for (int i=0; i<allComponents.size()-1; i++) {
+  int acsize=allComponents.size();
+  String[] savedObjects = new String[acsize];
+  for (int i=0; i<acsize; i++) {
     Component d = allComponents.get(i);
     if (d.toolbar) continue;
 
@@ -196,12 +197,6 @@ void draw() {
   if (drawLine) {
     fill(0);
     line(linex, liney, mouseX, mouseY);
-  }
-
-  if (keyPressed) {
-    if (key=='s') {
-      WorkAllComponents();
-    }
   }
 }
 /*void draw() {

@@ -93,6 +93,11 @@ void mouseReleased() {
   save2();
   WorkAllComponents();
 }
+/*void keyPressed() {
+ if (key=='s') {
+ save2();
+ }
+ }*/
 
 /*void mousePressed() {
  for (int i = list.size()-1; i>=0; i--) { 
