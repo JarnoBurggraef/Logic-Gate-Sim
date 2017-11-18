@@ -75,10 +75,8 @@ void mouseReleased() {
   locked = false;
   if (drawLine) {
     drawLine=false;
-    //////////
     lineStart.outputComponents[lineStartIndex] = null;
     lineStart.outputComponentsIndices[lineStartIndex] = 0;
-    //////////
     for (int i = allComponents.size()-1; i>=0; i--) {
       Component comp = allComponents.get(i);
       if (comp.toolbar)continue;
