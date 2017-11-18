@@ -90,6 +90,6 @@ void mouseReleased() {
       }
     }
   }
-  save2();
+  save();
   WorkAllComponents();
 }

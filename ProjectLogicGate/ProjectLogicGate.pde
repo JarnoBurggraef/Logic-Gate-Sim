@@ -3,7 +3,6 @@ import java.nio.file.*;
 
 
 Component activeComponent;
-//ArrayList<Gate> list;
 int mouseXoff, mouseYoff, lockedItem, lineStartIndex, linex, liney;
 boolean locked, drawLine, changed;
 String gateType;
@@ -25,8 +24,7 @@ void setup() {
   sketch = this;
   size(1000, 800);
   if (loadData) {
-    load2();
-    //load();
+    load();
   } 
   Component t = new AndGate(20, 20);
   t.toolbar = true;
@@ -44,7 +42,7 @@ void setup() {
   textSize(25);
 }
 
-void save2() {
+void save() {
   int acsize=allComponents.size();
   String[] savedObjects = new String[acsize];
   for (int i=0; i<acsize; i++) {
@@ -61,7 +59,7 @@ void save2() {
   }
   saveStrings("save.txt", savedObjects);
 }
-void load2() {
+void load() {
   String[] read = loadStrings("save.txt");
   println("There are " + read.length + " obects in the save file.");
   for ( int i=0; i<read.length; i++) {
