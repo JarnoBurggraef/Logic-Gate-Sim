@@ -1,8 +1,10 @@
 ArrayList<Component> allComponents = new ArrayList<Component>();
-abstract class Component {
+class Component {
   int x, y, xsize, ysize;
   
   boolean isMoving = false;
+  
+  boolean toolbar = false;
   
   Component[] inputComponents;
   boolean[] inputs;
@@ -17,24 +19,66 @@ abstract class Component {
   Component(int _x, int _y){
     x = _x;
     y = _y;
+    if (!allComponents.contains(this)){
+      allComponents.add(this);
+    }
   }
   Component(){
-    x = width/2;
-    y = height/2;
+    this(width/2,height/2);
   }
   
   color getEdgeColor(){
     return isMoving ? color(255,0,0) : color(0);
   }
-  void drawBackground(){
+  void DrawBackground(){
     fill(255);
     stroke(getEdgeColor());
     rect(x,y,xsize,ysize);
   }
   
-  abstract void Paint();
+  void Paint(){}
   
-  abstract void Work();
+  void Work(){}
+  
+  void DrawStandardStuff(){
+    DrawBackground();
+    DrawIO();
+  }
+  
+  int[] getCableEndPos(int index, int row){
+    int _x = row == 0 ? x+5 : x+xsize-25;
+    int _y = y+(int)(ysize*(float(index+1)/((row==0 ? inputSize : outputSize)+1))) -10; 
+    return new int[]{_x,_y};
+}
+  
+  void DrawIO(){
+    fill(255);
+    stroke(getEdgeColor());
+    for (int i = 0; i<inputSize;i++){
+      int[] pos = getCableEndPos(i,0);
+      rect(pos[0],pos[1],20,20);
+    }
+    
+    for (int i = 0; i<outputSize;i++){
+      int[] pos = getCableEndPos(i,1);
+      rect(pos[0],pos[1],20,20);
+    }
+    
+  }
+  void DrawCables(){
+    for (int i = 0; i<outputComponents.length;i++){
+      if (outputs[i]) {
+        stroke(255, 30, 10);
+      } else {
+        stroke(0);
+      }
+      if (outputComponents[i]==null) continue;
+      int[] start = getCableEndPos(i,1);
+      int[] end = outputComponents[i].getCableEndPos(outputComponentsIndices[i],0);
+      line(start[0]+10,start[1]+10,end[0]+10,end[1]+10);
+    }
+    stroke(0);
+  }
   
   void TransmitOutput(){
     for (int i=0;i<outputComponents.length; i++){
@@ -54,6 +98,7 @@ abstract class Component {
     outputs = new boolean[outputSize];  
     outputComponentsIndices = new int[outputSize];
   }
+  
 }
 
 void WorkAllComponents(){
@@ -61,5 +106,14 @@ void WorkAllComponents(){
     if (c instanceof Schalter){
       c.Work();
     }
+  }
+}
+
+void DrawAllComponents(){
+  for (Component c : allComponents){
+    c.Paint();
+  }
+  for (Component c : allComponents){
+    c.DrawCables();
   }
 }

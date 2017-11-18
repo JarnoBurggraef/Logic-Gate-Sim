@@ -1,4 +1,4 @@
-class Gate {
+/*class Gate {
   String type;
   int pointerIndex, x, y, xsize, ysize;
   boolean move, inTop, inBottom, outTop, output, toolbar;  //inTop ist auch der Eingang für NOTs oder die Schalter
@@ -92,4 +92,4 @@ class Gate {
       dest.work();
     }
   }
-}
+}*/
