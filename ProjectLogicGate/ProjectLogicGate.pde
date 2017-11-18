@@ -14,31 +14,6 @@ static PApplet sketch;
 
 File directory = new File(".");
 
-/*void setup() {
- size(1000, 800);
- list = new ArrayList<Gate>();
- a = new Gate(20, 20, "and");
- a.toolbar=true;
- list.add(a);
- a = new Gate(140, 20, "or");
- a.toolbar=true;
- list.add(a);
- a = new Gate(260, 20, "schalter");
- a.toolbar=true;
- list.add(a);
- a = new Gate(265, 80, "lamp");
- a.toolbar=true;
- list.add(a);
- a = new Gate(380, 20, "not");
- a.toolbar=true;
- list.add(a);
- println(list.size(), ":");
- for (Gate a : list) {
- println(a.type);
- }
- textSize(25);
- }
- */
 String path(String name) {
   //return System.getProperty("." + File.separator + name);
   //return System.getProperty("user.dir") + File.separator + name;
@@ -69,43 +44,6 @@ void setup() {
   textSize(25);
 }
 
-/*void save() {
- FileOutputStream fout = null;
- ObjectOutputStream oos = null;
- 
- try {
- fout = new FileOutputStream(path("data.txt"));
- oos = new ObjectOutputStream(fout);
- oos.writeObject(allComponents);
- 
- System.out.println("Done");
- } 
- catch (Exception ex) {
- 
- ex.printStackTrace();
- } 
- finally {
- 
- if (fout != null) {
- try {
- fout.close();
- } 
- catch (IOException e) {
- e.printStackTrace();
- }
- }
- 
- if (oos != null) {
- try {
- oos.close();
- } 
- catch (IOException e) {
- e.printStackTrace();
- }
- }
- }
- }*/
-
 void save2() {
   int acsize=allComponents.size();
   String[] savedObjects = new String[acsize];
@@ -123,19 +61,6 @@ void save2() {
   }
   saveStrings("save.txt", savedObjects);
 }
-/*void load() {
- try {
- ObjectInputStream ois = new ObjectInputStream(new FileInputStream(path("data.txt")));
- 
- ArrayList<Component> allComponents = (ArrayList<Component>) ois.readObject();
- println(allComponents.size());
- print("succes");
- ois.close();
- } 
- catch (Exception ex) {
- ex.printStackTrace();
- }
- }*/
 void load2() {
   String[] read = loadStrings("save.txt");
   println("There are " + read.length + " obects in the save file.");
@@ -172,6 +97,10 @@ void WorkAllComponents() {
     }
   }
 }
+void toolbar() {  
+  fill(100);
+  rect(0, 0, width, 160);
+}
 
 void DrawAllComponents() {
   for (Component c : allComponents) {
@@ -199,26 +128,3 @@ void draw() {
     line(linex, liney, mouseX, mouseY);
   }
 }
-/*void draw() {
- clear();
- background(200);
- toolbar();
- if (locked) {
- Gate a = list.get(lockedItem);
- a.x=mouseX-mouseXoff;
- a.y=mouseY-mouseYoff;
- }
- for (Gate a : list) {
- if (a.type.equals("schalter")) {
- a.work();
- }
- a.paint();
- }
- for (Gate a : list) {
- a.paintCable();
- }
- if (lined) {
- fill(0);
- line(linex, liney, mouseX, mouseY);
- }
- }*/

@@ -1,16 +1,6 @@
-schalter,237,468,
-schalter,281,519,
 null
 null
 null
 null
 null
-null
-or,310,232,
-not,383,556,
-schalter,481,556,
-schalter,568,536,
-and,585,230,
-not,609,499,
-not,635,470,
 null
