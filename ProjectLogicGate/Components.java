@@ -1,6 +1,5 @@
-import java.io.Serializable;
 import static processing.core.PApplet.*;
-class AndGate extends Component implements Serializable {
+class AndGate extends Component {
   public AndGate() {
     this(0, 0);
   }
@@ -26,7 +25,7 @@ class AndGate extends Component implements Serializable {
   }
 }
 
-class OrGate extends Component  implements Serializable {
+class OrGate extends Component {
   OrGate() {
     this(0, 0);
   }
@@ -53,7 +52,7 @@ class OrGate extends Component  implements Serializable {
   }
 }
 
-class NotGate extends Component implements Serializable {
+class NotGate extends Component {
   NotGate() {
     this(0, 0);
   }
@@ -80,7 +79,7 @@ class NotGate extends Component implements Serializable {
   }
 }
 
-class Schalter extends Component implements Serializable {
+class Schalter extends Component {
   Schalter() {
     this(0, 0);
   }
@@ -106,7 +105,7 @@ class Schalter extends Component implements Serializable {
   }
 }
 
-class Lampe extends Component implements Serializable {
+class Lampe extends Component {
   Lampe() {
     this(0, 0);
   }
@@ -131,7 +130,7 @@ class Lampe extends Component implements Serializable {
     outputs[0] = inputs[0];
   }
 }
-class Splitter extends Component implements Serializable {
+class Splitter extends Component {
   Splitter() {
     this(0, 0);
   }
