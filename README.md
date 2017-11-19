@@ -6,4 +6,4 @@ TODO:
 -find an easy way to create more circuits/make it able to add clusters of circuits
 
 Your created circuits are automatically saved as "save.txt".
-If you want to have a look on a friends creation, copy his "save.txt" into your one.
+If you want to have a look on a friends creation, copy the text from his "save.txt" into your one.
