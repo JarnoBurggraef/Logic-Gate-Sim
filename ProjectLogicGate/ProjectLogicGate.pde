@@ -25,7 +25,7 @@ void setup() {
   t.toolbar = true;
   t = new Splitter(620, 20);
   t.toolbar = true;
-println(allComponents.size());
+  println(allComponents.size());
   if (loadData) {
     load();
   } 
