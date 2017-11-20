@@ -1,4 +1,3 @@
-import static processing.core.PApplet.*;
 class AndGate extends Component {
   public AndGate() {
     this(0, 0);
@@ -16,8 +15,8 @@ class AndGate extends Component {
   }
   void Paint() {
     DrawStandardStuff();
-    sketch.fill(0);
-    sketch.text("&", x+40, y+70);
+    fill(0);
+    text("&", x+40, y+70);
   }
   void Work() {
     outputs[0] = inputs[0] && inputs[1];
@@ -42,8 +41,8 @@ class OrGate extends Component {
 
   void Paint() {
     DrawStandardStuff();
-    sketch.fill(0);
-    sketch.text(">=1", x+15, y+70);
+    fill(0);
+    text(">=1", x+15, y+70);
   }
 
   void Work() {
@@ -69,8 +68,8 @@ class NotGate extends Component {
 
   void Paint() {
     DrawStandardStuff();
-    sketch.fill(0);
-    sketch.text("!", x+45, y+25);
+    fill(0);
+    text("!", x+45, y+25);
   }
 
   void Work() {
@@ -95,9 +94,9 @@ class Schalter extends Component {
   }
   void Paint() {
     DrawStandardStuff();
-    if (inputs[0])sketch.fill(0, 255, 0);
-    else sketch.fill(255, 0, 0);
-    sketch.rect(x+5, y+5, 40, 20);
+    if (inputs[0])fill(0, 255, 0);
+    else fill(255, 0, 0);
+    rect(x+5, y+5, 40, 20);
   }
   void Work() {
     outputs[0] = inputs[0];
@@ -121,10 +120,10 @@ class Lampe extends Component {
   }
   void Paint() {
     DrawStandardStuff();
-    if (outputs[0])sketch.fill(0, 255, 0);
-    else sketch.fill(255, 0, 0);
-    sketch.rect(x+30, y+5, 50, 50);
-    sketch.fill(255);
+    if (outputs[0])fill(0, 255, 0);
+    else fill(255, 0, 0);
+    rect(x+30, y+5, 50, 50);
+    fill(255);
   }
   void Work() {
     outputs[0] = inputs[0];

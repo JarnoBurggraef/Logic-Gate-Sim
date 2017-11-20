@@ -1,15 +1,13 @@
-import java.io.Serializable;
-import processing.core.*;
-import static processing.core.PApplet.*;
 
-class Component implements Serializable {
+
+class Component {
   int x, y, xsize, ysize;
 
   boolean isMoving = false;
 
   boolean toolbar = false;
 
-  Component[] inputComponents;
+  //Component[] inputComponents;
   boolean[] inputs;
   int inputSize;
 
@@ -19,15 +17,11 @@ class Component implements Serializable {
   boolean[] outputs;
   int outputSize;
 
-  transient PApplet sketch;
-
   Component(int _x, int _y) {
     x = _x;
     y = _y;
-    sketch  = ProjectLogicGate.sketch;
-    ProjectLogicGate main = (ProjectLogicGate)sketch;
-    if (!main.allComponents.contains(this)) {
-      main.allComponents.add(this);
+    if (allComponents.contains(this)) {
+      allComponents.add(this);
     }
   }
   Component() {
@@ -35,12 +29,12 @@ class Component implements Serializable {
   }
 
   int getEdgeColor() {
-    return isMoving ? sketch.color(255, 0, 0) : sketch.color(0);
+    return isMoving ? color(255, 0, 0) : color(0);
   }
   void DrawBackground() {
-    sketch.fill(255);
-    sketch.stroke(getEdgeColor());
-    sketch.rect(x, y, xsize, ysize);
+    fill(255);
+    stroke(getEdgeColor());
+    rect(x, y, xsize, ysize);
   }
 
   void Paint() {
@@ -61,31 +55,31 @@ class Component implements Serializable {
   }
 
   void DrawIO() {
-    sketch.fill(255);
-    sketch.stroke(getEdgeColor());
+    fill(255);
+    stroke(getEdgeColor());
     for (int i = 0; i<inputSize; i++) {
       int[] pos = getCableEndPos(i, 0);
-      sketch.rect(pos[0], pos[1], 20, 20);
+      rect(pos[0], pos[1], 20, 20);
     }
 
     for (int i = 0; i<outputSize; i++) {
       int[] pos = getCableEndPos(i, 1);
-      sketch.rect(pos[0], pos[1], 20, 20);
+      rect(pos[0], pos[1], 20, 20);
     }
   }
   void DrawCables() {
     for (int i = 0; i<outputComponents.length; i++) {
       if (outputs[i]) {
-        sketch.stroke(255, 30, 10);
+        stroke(255, 30, 10);
       } else {
-        sketch.stroke(0);
+        stroke(0);
       }
       if (outputComponents[i]==null) continue;
       int[] start = getCableEndPos(i, 1);
       int[] end = outputComponents[i].getCableEndPos(outputComponentsIndices[i], 0);
-      sketch.line(start[0]+10, start[1]+10, end[0]+10, end[1]+10);
+      line(start[0]+10, start[1]+10, end[0]+10, end[1]+10);
     }
-    sketch.stroke(0);
+    stroke(0);
   }
 
   void TransmitOutput() {
@@ -95,12 +89,11 @@ class Component implements Serializable {
         c.inputs[outputComponentsIndices[i]] = outputs[i];
         c.Work();
       }
-      //println("ERROR: No output-component for "+this+" at index " + i+" specified");
     }
   }
 
   void setupIO() {
-    inputComponents = new Component[inputSize];
+    //inputComponents = new Component[inputSize];
     inputs = new boolean[inputSize];
     outputComponents = new Component[outputSize];
     outputs = new boolean[outputSize];  

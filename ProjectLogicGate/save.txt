@@ -1,8 +1,4 @@
-null
-null
-null
-null
-null
-null
-or,213,410,
-not,213,373,
+schalter,253,311,7;0
+and,401,343,8;0
+lampe,686,455,-1;0
+schalter,265,462,7;1

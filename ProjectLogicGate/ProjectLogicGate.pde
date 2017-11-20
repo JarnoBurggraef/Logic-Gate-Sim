@@ -1,7 +1,3 @@
-import java.io.*;
-import java.nio.file.*;
-
-
 Component activeComponent;
 int mouseXoff, mouseYoff, lockedItem, lineStartIndex, linex, liney;
 boolean locked, drawLine, changed;
@@ -13,19 +9,10 @@ static PApplet sketch;
 
 File directory = new File(".");
 
-String path(String name) {
-  //return System.getProperty("." + File.separator + name);
-  //return System.getProperty("user.dir") + File.separator + name;
-  return Paths.get("").toAbsolutePath().toString()+"/"+name;
-}
-
 boolean loadData = true;
 void setup() {
   sketch = this;
   size(1000, 800);
-  if (loadData) {
-    load();
-  } 
   Component t = new AndGate(20, 20);
   t.toolbar = true;
   t = new OrGate(140, 20);
@@ -38,7 +25,10 @@ void setup() {
   t.toolbar = true;
   t = new Splitter(620, 20);
   t.toolbar = true;
-
+println(allComponents.size());
+  if (loadData) {
+    load();
+  } 
   textSize(25);
 }
 
@@ -56,6 +46,10 @@ void save() {
     else if (d instanceof Schalter)  gateType="schalter";
     else if (d instanceof Lampe)  gateType="lampe";
     savedObjects[i]=gateType+","+d.x+","+d.y+",";
+    for (int j=0; j<d.outputComponents.length; j++) {
+      int index = d.outputComponents[j] == null ? -1 : allComponents.indexOf(d.outputComponents[j]);
+      savedObjects[i] += index + ";"+d.outputComponentsIndices[j];
+    }
   }
   saveStrings("save.txt", savedObjects);
 }
@@ -84,6 +78,18 @@ void load() {
     case "splitter":
       u = new Splitter(int(data[1]), int(data[2])); 
       break;
+    }
+    println(allComponents.size());
+  }
+  for ( int i=0; i<read.length; i++) {
+    String[] data = split(read[i], ',');
+    Component u = allComponents.get(i);
+    for (int  j = 3; j<data.length; j++) {
+      String[] tuple =split(data[j], ";");
+      if (!tuple[0].equals("-1")) {
+        u.outputComponents[j-3]=allComponents.get(int(tuple[0]));
+        u.outputComponentsIndices[j-3] = int(tuple[1]);
+      }
     }
   }
 }
