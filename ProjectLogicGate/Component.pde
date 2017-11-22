@@ -20,7 +20,7 @@ class Component {
   Component(int _x, int _y) {
     x = _x;
     y = _y;
-    if (allComponents.contains(this)) {
+    if (!allComponents.contains(this)) {
       allComponents.add(this);
     }
   }
