@@ -61,7 +61,7 @@ void load() {
     Component u;
     switch(data[0]) {
     case "and":
-      u = new AndGate(int(data[1]), int(data[2])); 
+      u = new AndGate(int(data[1]), int(data[2]));
       break;
     case "or":
       u = new OrGate(int(data[1]), int(data[2])); 

@@ -69,8 +69,6 @@ void mouseReleased() {
     if (mouseY<160) {
       allComponents.remove(activeComponent);
       drawLine=false;
-      lineStart.outputComponents[lineStartIndex] = null;
-      lineStart.outputComponentsIndices[lineStartIndex] = 0;
     }
     activeComponent = null;
   }
