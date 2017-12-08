@@ -151,3 +151,24 @@ class Splitter extends Component {
     TransmitOutput();
   }
 }
+class TextBox extends Component {
+  TextBox() {
+    this(0, 0);
+  }
+  TextBox(int _x, int _y) {
+    super(_x, _y);
+    xsize= 100;
+    ysize = 30;
+    
+    inputSize = 0;
+    outputSize = 0;
+    setupIO();
+
+    String text;
+  }
+  void Paint() {
+    DrawStandardStuff();
+  }
+  void Work() {
+  }
+}

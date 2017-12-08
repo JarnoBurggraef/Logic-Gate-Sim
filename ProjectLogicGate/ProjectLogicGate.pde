@@ -25,6 +25,8 @@ void setup() {
   t.toolbar = true;
   t = new Splitter(620, 20);
   t.toolbar = true;
+  t = new TextBox(720, 20);
+  t.toolbar = true;
   println(allComponents.size());
   if (loadData) {
     load();
@@ -45,10 +47,12 @@ void save() {
     else if (d instanceof NotGate)  gateType="not";
     else if (d instanceof Schalter)  gateType="schalter";
     else if (d instanceof Lampe)  gateType="lampe";
+    else if (d instanceof TextBox)  gateType="text";
+
     savedObjects[i]=gateType+","+d.x+","+d.y+",";
     for (int j=0; j<d.outputComponents.length; j++) {
       int index = d.outputComponents[j] == null ? -1 : allComponents.indexOf(d.outputComponents[j]);
-      savedObjects[i] += index + ";"+d.outputComponentsIndices[j];
+      savedObjects[i] += index + ";"+d.outputComponentsIndices[j]+",";
     }
   }
   saveStrings("save.txt", savedObjects);
@@ -78,6 +82,9 @@ void load() {
     case "splitter":
       u = new Splitter(int(data[1]), int(data[2])); 
       break;
+    case "text":
+      u = new TextBox(int(data[1]), int(data[2])); 
+      break;
     }
     println(allComponents.size());
   }
@@ -85,10 +92,18 @@ void load() {
     String[] data = split(read[i], ',');
     Component u = allComponents.get(i);
     for (int  j = 3; j<data.length; j++) {
-      String[] tuple =split(data[j], ";");
-      if (!tuple[0].equals("-1")) {
-        u.outputComponents[j-3]=allComponents.get(int(tuple[0]));
-        u.outputComponentsIndices[j-3] = int(tuple[1]);
+      String[] stringtuple = split(data[j], ";");
+      // println("data:",data[j]);
+      int[] inttuple= new int[stringtuple.length];
+      for (byte b =0; b<stringtuple.length; b++) {
+        inttuple[b] = int(stringtuple[b]);
+      }
+      //  println("inttuple[0]:");
+      //  println(inttuple[0]);
+      if (inttuple[0]>0) {
+        u.outputComponents[j-3]=allComponents.get(inttuple[0]);
+        //   println("opc:", j-3);
+        u.outputComponentsIndices[j-3] = inttuple[1];
       }
     }
   }

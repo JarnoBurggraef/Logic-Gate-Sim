@@ -38,6 +38,8 @@ void mousePressed() {
           activeComponent = new Lampe();
         else if (component instanceof Splitter)
           activeComponent = new Splitter();
+          else if (component instanceof TextBox)
+          activeComponent = new TextBox();
         activeComponent.x = component.x;
         activeComponent.y = component.y;
         activeComponent.isMoving=true;
