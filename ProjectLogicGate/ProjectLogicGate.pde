@@ -1,7 +1,6 @@
 Component activeComponent;
 int mouseXoff, mouseYoff, lockedItem, lineStartIndex, linex, liney;
 boolean locked, drawLine, changed;
-String gateType;
 Component lineStart;
 ArrayList<Component> allComponents = new ArrayList<Component>();
 
@@ -35,6 +34,7 @@ void setup() {
 void save() {
   int acsize=allComponents.size();
   String[] savedObjects = new String[acsize];
+  String gateType = "";
   for (int i=0; i<acsize; i++) {
     Component d = allComponents.get(i);
     if (d.toolbar) continue;
@@ -54,8 +54,14 @@ void save() {
   saveStrings("save.txt", savedObjects);
 }
 void load() {
-  String[] read = loadStrings("save.txt");
+  String[] read;
+  try {
+  read = loadStrings("save.txt");
   println("There are " + read.length + " obects in the save file.");
+  } catch(Exception e){
+    
+    return;
+  }
   for ( int i=0; i<read.length; i++) {
     String[] data = split(read[i], ',');
     Component u;

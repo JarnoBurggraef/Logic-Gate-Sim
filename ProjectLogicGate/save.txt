@@ -1,4 +1,11 @@
-schalter,253,311,7;0
-and,401,343,8;0
-lampe,686,455,-1;0
-schalter,265,462,7;1
+null
+null
+null
+null
+null
+null
+or,443,395,8;0
+not,274,322,6;0
+lampe,727,488,-1;0
+schalter,18,433,7;0
+schalter,86,565,6;1
