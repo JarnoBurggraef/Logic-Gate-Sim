@@ -91,6 +91,25 @@ void mouseReleased() {
       }
     }
   }
-  save();
+  if (SaveToBtn.mouseOverButton()) {
+    SaveTo();
+  } else if (NewBtn.mouseOverButton()){
+    New();
+  } else if (LoadBtn.mouseOverButton()){
+    Load();
+  } else if (LoadBlockBtn.mouseOverButton()){
+    LoadBlock();
+  }
+  for (Component c : allComponents) {
+    if (c.toolbar) continue;
+    if (inside(c.x, c.y, c.x+c.xsize, c.y+c.ysize) && mouseButton == RIGHT) {
+      if (c instanceof Schalter) {
+        ((Schalter)c).isInputSchalter = !((Schalter)c).isInputSchalter;
+      } else if (c instanceof Lampe) {
+        ((Lampe)c).isOutputLampe = !((Lampe)c).isOutputLampe;
+      }
+    }
+  }
+  save("save.txt");
   WorkAllComponents();
 }
