@@ -1,66 +1,3 @@
-class Block extends Component {
-  
-  ArrayList<Component> innerComponents = new ArrayList<Component>();
-  
-  public Block(){
-    this(0,0,new ArrayList<Component>());
-  }
-  public Block(int _x, int _y, ArrayList<Component> _innerComponents){
-    super(_x,_y);
-    
-    xsize = 120;
-    ysize = 120;
-    
-    innerComponents = _innerComponents;
-    
-    inputSize = 0;
-    outputSize = 0;
-    
-    loadIO();
-
-  }
-  void loadIO(){
-    for (Component c : innerComponents){
-      if (c instanceof Schalter){
-        if (((Schalter)c).isInputSchalter){
-          inputSize += 1;
-        }
-      } else if (c instanceof Lampe){
-        if (((Lampe)c).isOutputLampe){
-          outputSize +=1 ;
-        }
-      }
-    }
-    setupIO();
-  }
-  
-  void Paint(){
-    DrawStandardStuff();
-  }
-  void Work(){
-    int i = 0;
-    for (Component c : this.innerComponents){
-      if (c instanceof Schalter){
-        if (((Schalter)c).isInputSchalter){
-          c.inputs[0] = this.inputs[i];
-          i++;
-          c.Work();
-        }
-      }
-    }
-    i = 0;
-    for (Component c : this.innerComponents){
-      if (c instanceof Lampe){
-        if (((Lampe)c).isOutputLampe){
-          this.outputs[i] = c.outputs[0];
-          i++;
-        }
-      }
-    }
-    TransmitOutput();
-  }
-}
-
 class AndGate extends Component {
   public AndGate() {
     this(0, 0);
@@ -142,8 +79,6 @@ class NotGate extends Component {
 }
 
 class Schalter extends Component {
-
-  boolean isInputSchalter = false;
   Schalter() {
     this(0, 0);
   }
@@ -158,10 +93,6 @@ class Schalter extends Component {
     setupIO();
   }
   void Paint() {
-    if (isInputSchalter) {
-      fill(color(255, 255, 0));
-      rect(x-2, y-2, xsize+4, ysize+4);
-    }
     DrawStandardStuff();
     if (inputs[0])fill(0, 255, 0);
     else fill(255, 0, 0);
@@ -174,8 +105,6 @@ class Schalter extends Component {
 }
 
 class Lampe extends Component {
-  boolean isOutputLampe = false;
-
   Lampe() {
     this(0, 0);
   }
@@ -190,10 +119,6 @@ class Lampe extends Component {
     setupIO();
   }
   void Paint() {
-    if (isOutputLampe) {
-      fill(color(255, 255, 0));
-      rect(x-2, y-2, xsize+4, ysize+4);
-    }
     DrawStandardStuff();
     if (outputs[0])fill(0, 255, 0);
     else fill(255, 0, 0);

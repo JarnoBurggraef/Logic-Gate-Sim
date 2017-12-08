@@ -16,8 +16,6 @@ class Component {
   int[] outputComponentsIndices;
   boolean[] outputs;
   int outputSize;
-  
-  boolean hidden = false;
 
   Component(int _x, int _y) {
     x = _x;
