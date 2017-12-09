@@ -2,6 +2,8 @@ class Block extends Component {
   
   ArrayList<Component> innerComponents = new ArrayList<Component>();
   
+  String name;
+  
   public Block(){
     this(0,0,new ArrayList<Component>());
   }
@@ -36,6 +38,10 @@ class Block extends Component {
   
   void Paint(){
     DrawStandardStuff();
+    textSize(12);
+    fill(0);
+    text(name,x+30,y+20);
+    textSize(25);
   }
   void Work(){
     int i = 0;
@@ -224,5 +230,32 @@ class Splitter extends Component {
     outputs[0] = inputs[0];
     outputs[1] = inputs[0];
     TransmitOutput();
+  }
+}
+
+class TextBox extends Component {
+  
+  String text;
+  
+  TextBox(){
+    this(0,0);
+  }
+  TextBox(int _x, int _y){
+    super(_x,_y);
+     xsize= 100;
+    ysize = 30;
+    
+    inputSize = 0;
+    outputSize = 0;
+    setupIO();
+  }
+  void Paint() {
+    DrawStandardStuff();
+    textSize(12);
+    fill(0);
+    text(name,x+30,y+20);
+    textSize(25);
+  }
+  void Work() {
   }
 }

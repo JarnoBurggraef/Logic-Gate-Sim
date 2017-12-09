@@ -38,6 +38,8 @@ void SetupToolbar(){
   t.toolbar = true;
   t = new Splitter(620, 20);
   t.toolbar = true;
+  t = new TextBox(740,20);
+  t.toolbar = true;
   
   TOOLBARSIZE = 0;
   for (Component c: allComponents){
@@ -128,7 +130,9 @@ void LoadBlockFile(File selection){
       }
     }
   }
-  new Block(width/2,height/2,blockComponents);
+  Block b = new Block(width/2,height/2,blockComponents);
+  String[] nlis = selection.getAbsolutePath().split("/");
+  b.name = nlis[nlis.length-1];
 }
 
 
@@ -167,6 +171,7 @@ void save(String name) {
         savedObjects[i] += allComponents.indexOf(((Block)d).innerComponents.get(j));
         if (j!=((Block)d).innerComponents.size()-1) savedObjects[i] += ";";
       }
+      savedObjects[i] += ","+((Block)d).name;
     }
   }
   saveStrings(name, savedObjects);
@@ -222,7 +227,7 @@ void load(String name) {
     Component u = allComponents.get(i+TOOLBARSIZE);
     int end = data.length;
     if (u instanceof Block){
-      String[] innerC = split(data[data.length-1],";");
+      String[] innerC = split(data[data.length-2],";");
       ArrayList<Component> innerComponents = new ArrayList<Component>();
       for (String c : innerC){
         Component comp = allComponents.get(int(c));
@@ -232,7 +237,8 @@ void load(String name) {
       }
       ((Block)u).innerComponents = innerComponents;
       ((Block)u).loadIO();
-      end = data.length-1;
+      ((Block)u).name = data[data.length-1];
+      end = data.length-2;
     }
     
     for (int  j = 4; j<end; j++) {
