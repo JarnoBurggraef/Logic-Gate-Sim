@@ -9,6 +9,8 @@ Button SaveToBtn;
 Button LoadBlockBtn;
 Button LoadBtn;
 
+int TOOLBARSIZE = 0;
+
 boolean loadData = true;
 void setup() {
   size(1000, 800);
@@ -36,13 +38,11 @@ void SetupToolbar(){
   t.toolbar = true;
   t = new Splitter(620, 20);
   t.toolbar = true;
-<<<<<<< HEAD
-  t = new TextBox(720, 20);
-  t.toolbar = true;
-  println(allComponents.size());
-  if (loadData) {
-    load();
-=======
+  
+  TOOLBARSIZE = 0;
+  for (Component c: allComponents){
+    if (c.toolbar) TOOLBARSIZE ++;
+  }
 }
 void New(){
   allComponents = new ArrayList<Component>();
@@ -76,7 +76,6 @@ void LoadBlockFile(File selection){
   try {
     read = loadStrings(selection.getAbsolutePath());
     println("There are " + read.length + " obects in the save file.");
->>>>>>> 60f97eaf5b68983485142ba4b78a8f2be409975a
   } 
   catch(Exception e) {
 
@@ -117,33 +116,31 @@ void LoadBlockFile(File selection){
     blockComponents.add(u);
   }
   
-  for ( int i=6; i<read.length; i++) {
+  for ( int i=0; i<read.length; i++) {
     String[] data = split(read[i], ',');
     Component u = blockComponents.get(i);
     u.hidden = true;
     for (int  j = 4; j<data.length; j++) {
       String[] tuple =split(data[j], ";");
       if (!tuple[0].equals("-1")) {
-        u.outputComponents[j-4]=blockComponents.get(int(tuple[0]));
+        u.outputComponents[j-4]=blockComponents.get(int(tuple[0])-TOOLBARSIZE);
         u.outputComponentsIndices[j-4] = int(tuple[1]);
       }
     }
   }
   new Block(width/2,height/2,blockComponents);
-  for (Component c : allComponents){
-    if (c.hidden) println("asdf");
-  }
 }
 
 
 
 void save(String name) {
   int acsize=allComponents.size();
-  String[] savedObjects = new String[acsize];
+  String[] savedObjects = new String[acsize-TOOLBARSIZE];
   String gateType = "";
-  for (int i=0; i<acsize; i++) {
-    Component d = allComponents.get(i);
+  for (int ci=0; ci<acsize; ci++) {
+    Component d = allComponents.get(ci);
     if (d.toolbar) continue;
+    int i = ci-TOOLBARSIZE;
 
     if (d instanceof Splitter) gateType="splitter";
     else if (d instanceof AndGate)  gateType="and";
@@ -151,14 +148,6 @@ void save(String name) {
     else if (d instanceof NotGate)  gateType="not";
     else if (d instanceof Schalter)  gateType="schalter";
     else if (d instanceof Lampe)  gateType="lampe";
-<<<<<<< HEAD
-    else if (d instanceof TextBox)  gateType="text";
-
-    savedObjects[i]=gateType+","+d.x+","+d.y+",";
-    for (int j=0; j<d.outputComponents.length; j++) {
-      int index = d.outputComponents[j] == null ? -1 : allComponents.indexOf(d.outputComponents[j]);
-      savedObjects[i] += index + ";"+d.outputComponentsIndices[j]+",";
-=======
     else if (d instanceof Block) gateType="block";
     savedObjects[i]=gateType+","+d.x+","+d.y+",";
     String IOState = "0";
@@ -178,7 +167,6 @@ void save(String name) {
         savedObjects[i] += allComponents.indexOf(((Block)d).innerComponents.get(j));
         if (j!=((Block)d).innerComponents.size()-1) savedObjects[i] += ";";
       }
->>>>>>> 60f97eaf5b68983485142ba4b78a8f2be409975a
     }
   }
   saveStrings(name, savedObjects);
@@ -216,41 +204,22 @@ void load(String name) {
     case "splitter":
       u = new Splitter(int(data[1]), int(data[2])); 
       break;
-<<<<<<< HEAD
-    case "text":
-      u = new TextBox(int(data[1]), int(data[2])); 
-      break;
-=======
     case "block":
       u = new Block(int(data[1]),int(data[2]), new ArrayList<Component>());
       break;
+    case "null":
+      continue;
     }
     if (u instanceof Lampe){
       ((Lampe)u).isOutputLampe = data[3]=="0" ? false : true;
     } else if (u instanceof Schalter){
       ((Schalter)u).isInputSchalter = data[3]=="0" ? false : true;
->>>>>>> 60f97eaf5b68983485142ba4b78a8f2be409975a
     }
   }
   
   for ( int i=0; i<read.length; i++) {
     String[] data = split(read[i], ',');
-    Component u = allComponents.get(i);
-<<<<<<< HEAD
-    for (int  j = 3; j<data.length; j++) {
-      String[] stringtuple = split(data[j], ";");
-      // println("data:",data[j]);
-      int[] inttuple= new int[stringtuple.length];
-      for (byte b =0; b<stringtuple.length; b++) {
-        inttuple[b] = int(stringtuple[b]);
-      }
-      //  println("inttuple[0]:");
-      //  println(inttuple[0]);
-      if (inttuple[0]>0) {
-        u.outputComponents[j-3]=allComponents.get(inttuple[0]);
-        //   println("opc:", j-3);
-        u.outputComponentsIndices[j-3] = inttuple[1];
-=======
+    Component u = allComponents.get(i+TOOLBARSIZE);
     int end = data.length;
     if (u instanceof Block){
       String[] innerC = split(data[data.length-1],";");
@@ -271,7 +240,6 @@ void load(String name) {
       if (!tuple[0].equals("-1")) {
         u.outputComponents[j-4]=allComponents.get(int(tuple[0]));
         u.outputComponentsIndices[j-4] = int(tuple[1]);
->>>>>>> 60f97eaf5b68983485142ba4b78a8f2be409975a
       }
     }
   }
