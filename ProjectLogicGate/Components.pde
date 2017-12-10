@@ -235,7 +235,7 @@ class Splitter extends Component {
 
 class TextBox extends Component {
   
-  String text;
+  String text = "";
   
   TextBox(){
     this(0,0);
