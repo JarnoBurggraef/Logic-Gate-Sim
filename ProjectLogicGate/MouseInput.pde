@@ -1,7 +1,7 @@
 void mousePressed() {
   if (mouseButton == RIGHT) {
     for (int i = allComponents.size()-1; i>=0; i--) { 
-      Component textc = allComponents.get(i);
+      textc = allComponents.get(i);
       if (textc instanceof TextBox) {
         if (inside(textc.x, textc.y, textc.x+textc.xsize, textc.y+textc.ysize)) {
           writing = true;
@@ -138,6 +138,7 @@ void keyPressed() {
   } else if (key == ENTER) {
     writing = false;
   } else {
-    textc.text = textc.text + key;
+    println(textc);
+    ((TextBox)textc).text = textc.text + key;
   }
 }
