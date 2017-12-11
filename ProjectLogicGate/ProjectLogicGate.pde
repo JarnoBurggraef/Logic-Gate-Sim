@@ -20,12 +20,12 @@ void setup() {
   } 
   textSize(25);
 
-  NewBtn = new Button(width-100,200,70,30,"New");
+  NewBtn = new Button(width-100, 200, 70, 30, "New");
   SaveToBtn = new Button(width-100, 250, 70, 30, "Save To");
-  LoadBtn = new Button(width-100,300,70,30,"Load");
-  LoadBlockBtn = new Button(width-100,350,70,30, "Load Block");
+  LoadBtn = new Button(width-100, 300, 70, 30, "Load");
+  LoadBlockBtn = new Button(width-100, 350, 70, 30, "Load Block");
 }
-void SetupToolbar(){
+void SetupToolbar() {
   Component t = new AndGate(20, 20);
   t.toolbar = true;
   t = new OrGate(140, 20);
@@ -38,15 +38,15 @@ void SetupToolbar(){
   t.toolbar = true;
   t = new Splitter(620, 20);
   t.toolbar = true;
-  t = new TextBox(740,20);
+  t = new TextBox(740, 20);
   t.toolbar = true;
-  
+
   TOOLBARSIZE = 0;
-  for (Component c: allComponents){
+  for (Component c : allComponents) {
     if (c.toolbar) TOOLBARSIZE ++;
   }
 }
-void New(){
+void New() {
   allComponents = new ArrayList<Component>();
   SetupToolbar();
 }
@@ -54,25 +54,25 @@ void New(){
 void SaveTo() {
   selectOutput("Select a location to save", "SaveToOut");
 }
-void SaveToOut(File selection){
-  if (selection!=null){
+void SaveToOut(File selection) {
+  if (selection!=null) {
     save(selection.getAbsolutePath());
   }
 }
 
-void Load(){
+void Load() {
   selectInput("Select a file", "LoadFile");
 }
-void LoadFile(File selection){
-  if (selection != null){
+void LoadFile(File selection) {
+  if (selection != null) {
     load(selection.getAbsolutePath());
   }
 }
 
-void LoadBlock(){
+void LoadBlock() {
   selectInput("Select a file", "LoadBlockFile");
 }
-void LoadBlockFile(File selection){
+void LoadBlockFile(File selection) {
   if (selection==null) return;
   String[] read;
   try {
@@ -105,19 +105,21 @@ void LoadBlockFile(File selection){
       break;
     case "splitter":
       u = new Splitter(int(data[1]), int(data[2])); 
+    case "textBox":
+      u = new TextBox(int(data[1]), int(data[2])); 
       break;
     case "block":
       //TODO
       break;
     }
-    if (u instanceof Lampe){
+    if (u instanceof Lampe) {
       ((Lampe)u).isOutputLampe = data[3]=="0" ? false : true;
-    } else if (u instanceof Schalter){
+    } else if (u instanceof Schalter) {
       ((Schalter)u).isInputSchalter = data[3]=="0" ? false : true;
     }
     blockComponents.add(u);
   }
-  
+
   for ( int i=0; i<read.length; i++) {
     String[] data = split(read[i], ',');
     Component u = blockComponents.get(i);
@@ -130,7 +132,7 @@ void LoadBlockFile(File selection){
       }
     }
   }
-  Block b = new Block(width/2,height/2,blockComponents);
+  Block b = new Block(width/2, height/2, blockComponents);
   String[] nlis = selection.getAbsolutePath().split("/");
   b.name = nlis[nlis.length-1];
 }
@@ -152,6 +154,7 @@ void save(String name) {
     else if (d instanceof NotGate)  gateType="not";
     else if (d instanceof Schalter)  gateType="schalter";
     else if (d instanceof Lampe)  gateType="lampe";
+    else if (d instanceof TextBox)  gateType="textBox";
     else if (d instanceof Block) gateType="block";
     savedObjects[i]=gateType+","+d.x+","+d.y+",";
     String IOState = "0";
@@ -159,13 +162,13 @@ void save(String name) {
     if (d instanceof Schalter)  IOState = ((Schalter)d).isInputSchalter ? "1" : "0";
     savedObjects[i] += IOState+",";
     //if (gateType != "block"){
-      for (int j=0; j<d.outputComponents.length; j++) {
-        int index = d.outputComponents[j] == null ? -1 : allComponents.indexOf(d.outputComponents[j]);
-        savedObjects[i] += index + ";"+d.outputComponentsIndices[j];
-        if (j!= d.outputComponents.length-1 || gateType == "block"){
-          savedObjects[i] += ",";
-        }
+    for (int j=0; j<d.outputComponents.length; j++) {
+      int index = d.outputComponents[j] == null ? -1 : allComponents.indexOf(d.outputComponents[j]);
+      savedObjects[i] += index + ";"+d.outputComponentsIndices[j];
+      if (j!= d.outputComponents.length-1 || gateType == "block") {
+        savedObjects[i] += ",";
       }
+    }
     if (gateType == "block") {
       for (int j=0; j<((Block)d).innerComponents.size(); j++) {
         savedObjects[i] += allComponents.indexOf(((Block)d).innerComponents.get(j));
@@ -209,27 +212,30 @@ void load(String name) {
     case "splitter":
       u = new Splitter(int(data[1]), int(data[2])); 
       break;
+      case "textBox":
+      u = new Splitter(int(data[1]), int(data[2])); 
+      break;
     case "block":
-      u = new Block(int(data[1]),int(data[2]), new ArrayList<Component>());
+      u = new Block(int(data[1]), int(data[2]), new ArrayList<Component>());
       break;
     case "null":
       continue;
     }
-    if (u instanceof Lampe){
+    if (u instanceof Lampe) {
       ((Lampe)u).isOutputLampe = data[3]=="0" ? false : true;
-    } else if (u instanceof Schalter){
+    } else if (u instanceof Schalter) {
       ((Schalter)u).isInputSchalter = data[3]=="0" ? false : true;
     }
   }
-  
+
   for ( int i=0; i<read.length; i++) {
     String[] data = split(read[i], ',');
     Component u = allComponents.get(i+TOOLBARSIZE);
     int end = data.length;
-    if (u instanceof Block){
-      String[] innerC = split(data[data.length-2],";");
+    if (u instanceof Block) {
+      String[] innerC = split(data[data.length-2], ";");
       ArrayList<Component> innerComponents = new ArrayList<Component>();
-      for (String c : innerC){
+      for (String c : innerC) {
         Component comp = allComponents.get(int(c));
         if (comp.toolbar) continue;
         comp.hidden = true;
@@ -240,7 +246,7 @@ void load(String name) {
       ((Block)u).name = data[data.length-1];
       end = data.length-2;
     }
-    
+
     for (int  j = 4; j<end; j++) {
       String[] tuple =split(data[j], ";");
       if (!tuple[0].equals("-1")) {

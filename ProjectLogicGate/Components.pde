@@ -242,7 +242,7 @@ class TextBox extends Component {
   }
   TextBox(int _x, int _y){
     super(_x,_y);
-     xsize= 100;
+     xsize= 20+int(textWidth(text));
     ysize = 30;
     
     inputSize = 0;
