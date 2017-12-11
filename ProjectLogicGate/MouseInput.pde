@@ -1,57 +1,68 @@
 void mousePressed() {
-  for (int i = allComponents.size()-1; i>=0; i--) { 
-    Component component = allComponents.get(i);
-    ///////////////////////////////
-    if (!component.toolbar) {
-      for (int j = 0; j<component.outputSize; j++) {
-        int[] pos = component.getCableEndPos(j, 1);
-        if (inside(pos[0], pos[1], pos[0]+20, pos[1]+20)) {
-          if(component instanceof Lampe)continue;
-          drawLine = true;
-          linex = mouseX;
-          liney = mouseY;
-          lineStartIndex = j;
-          lineStart = component;
-          return;
-        }
-      }
-      if (component instanceof Schalter) {
-        if (inside(component.x+5, component.y+5, component.x+45, component.y+25)) {
-          component.inputs[0]^=true;
-          return;
+  if (mouseButton == RIGHT) {
+    for (int i = allComponents.size()-1; i>=0; i--) { 
+      Component textc = allComponents.get(i);
+      if (textc instanceof TextBox) {
+        if (inside(textc.x, textc.y, textc.x+textc.xsize, textc.y+textc.ysize)) {
+          textc.text="yes";
         }
       }
     }
+  } else {
+    for (int i = allComponents.size()-1; i>=0; i--) { 
+      Component component = allComponents.get(i);
+      ///////////////////////////////
+      if (!component.toolbar) {
+        for (int j = 0; j<component.outputSize; j++) {
+          int[] pos = component.getCableEndPos(j, 1);
+          if (inside(pos[0], pos[1], pos[0]+20, pos[1]+20)) {
+            if (component instanceof Lampe)continue;
+            drawLine = true;
+            linex = mouseX;
+            liney = mouseY;
+            lineStartIndex = j;
+            lineStart = component;
+            return;
+          }
+        }
+        if (component instanceof Schalter) {
+          if (inside(component.x+5, component.y+5, component.x+45, component.y+25)) {
+            component.inputs[0]^=true;
+            return;
+          }
+        }
+      }
 
-    //////////////////////////////
-    if (inside(component.x, component.y, component.x+component.xsize, component.y+component.ysize)) {
-      locked = true;
-      if (component.toolbar) {
-        if (component instanceof AndGate)
-          activeComponent = new AndGate();
-        else if (component instanceof OrGate)
-          activeComponent = new OrGate();
-        else if (component instanceof NotGate)
-          activeComponent = new NotGate();
-        else if (component instanceof Schalter)
-          activeComponent = new Schalter();
-        else if (component instanceof Lampe)
-          activeComponent = new Lampe();
-        else if (component instanceof Splitter)
-          activeComponent = new Splitter();
-        else if (component instanceof TextBox)
-          activeComponent = new TextBox();
-        activeComponent.x = component.x;
-        activeComponent.y = component.y;
-        activeComponent.isMoving=true;
-        mouseXoff=mouseX-activeComponent.x;
-        mouseYoff=mouseY-activeComponent.y;
-      } else {
-        activeComponent = component;
-        component.isMoving=true;
-        lockedItem = i;
-        mouseXoff=mouseX-component.x;
-        mouseYoff=mouseY-component.y;
+      //////////////////////////////
+      if (inside(component.x, component.y, component.x+component.xsize, component.y+component.ysize)) {
+        locked = true;
+        if (component.toolbar) {
+          if (component instanceof AndGate)
+            activeComponent = new AndGate();
+          else if (component instanceof OrGate)
+            activeComponent = new OrGate();
+          else if (component instanceof NotGate)
+            activeComponent = new NotGate();
+          else if (component instanceof Schalter)
+            activeComponent = new Schalter();
+          else if (component instanceof Lampe)
+            activeComponent = new Lampe();
+          else if (component instanceof Splitter)
+            activeComponent = new Splitter();
+          else if (component instanceof TextBox)
+            activeComponent = new TextBox();
+          activeComponent.x = component.x;
+          activeComponent.y = component.y;
+          activeComponent.isMoving=true;
+          mouseXoff=mouseX-activeComponent.x;
+          mouseYoff=mouseY-activeComponent.y;
+        } else {
+          activeComponent = component;
+          component.isMoving=true;
+          lockedItem = i;
+          mouseXoff=mouseX-component.x;
+          mouseYoff=mouseY-component.y;
+        }
       }
     }
   }
@@ -96,11 +107,11 @@ void mouseReleased() {
   }
   if (SaveToBtn.mouseOverButton()) {
     SaveTo();
-  } else if (NewBtn.mouseOverButton()){
+  } else if (NewBtn.mouseOverButton()) {
     New();
-  } else if (LoadBtn.mouseOverButton()){
+  } else if (LoadBtn.mouseOverButton()) {
     Load();
-  } else if (LoadBlockBtn.mouseOverButton()){
+  } else if (LoadBlockBtn.mouseOverButton()) {
     LoadBlock();
   }
   for (Component c : allComponents) {

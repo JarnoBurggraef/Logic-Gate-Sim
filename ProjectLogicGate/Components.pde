@@ -1,53 +1,51 @@
-class Block extends Component {
-  
+class Block extends Component  {
+
   ArrayList<Component> innerComponents = new ArrayList<Component>();
-  
   String name;
-  
-  public Block(){
-    this(0,0,new ArrayList<Component>());
+
+  public Block() {
+    this(0, 0, new ArrayList<Component>());
   }
-  public Block(int _x, int _y, ArrayList<Component> _innerComponents){
-    super(_x,_y);
-    
+  public Block(int _x, int _y, ArrayList<Component> _innerComponents) {
+    super(_x, _y);
+
     xsize = 120;
     ysize = 120;
-    
+
     innerComponents = _innerComponents;
-    
+
     inputSize = 0;
     outputSize = 0;
-    
-    loadIO();
 
+    loadIO();
   }
-  void loadIO(){
-    for (Component c : innerComponents){
-      if (c instanceof Schalter){
-        if (((Schalter)c).isInputSchalter){
+  void loadIO() {
+    for (Component c : innerComponents) {
+      if (c instanceof Schalter) {
+        if (((Schalter)c).isInputSchalter) {
           inputSize += 1;
         }
-      } else if (c instanceof Lampe){
-        if (((Lampe)c).isOutputLampe){
+      } else if (c instanceof Lampe) {
+        if (((Lampe)c).isOutputLampe) {
           outputSize +=1 ;
         }
       }
     }
     setupIO();
   }
-  
-  void Paint(){
+
+  void Paint() {
     DrawStandardStuff();
     textSize(12);
     fill(0);
-    text(name,x+30,y+20);
+    text(name, x+30, y+20);
     textSize(25);
   }
-  void Work(){
+  void Work() {
     int i = 0;
-    for (Component c : this.innerComponents){
-      if (c instanceof Schalter){
-        if (((Schalter)c).isInputSchalter){
+    for (Component c : this.innerComponents) {
+      if (c instanceof Schalter) {
+        if (((Schalter)c).isInputSchalter) {
           c.inputs[0] = this.inputs[i];
           i++;
           c.Work();
@@ -55,9 +53,9 @@ class Block extends Component {
       }
     }
     i = 0;
-    for (Component c : this.innerComponents){
-      if (c instanceof Lampe){
-        if (((Lampe)c).isOutputLampe){
+    for (Component c : this.innerComponents) {
+      if (c instanceof Lampe) {
+        if (((Lampe)c).isOutputLampe) {
           this.outputs[i] = c.outputs[0];
           i++;
         }
@@ -234,17 +232,17 @@ class Splitter extends Component {
 }
 
 class TextBox extends Component {
-  
+
   String text = "";
-  
-  TextBox(){
-    this(0,0);
+
+  TextBox() {
+    this(0, 0);
   }
-  TextBox(int _x, int _y){
-    super(_x,_y);
-     xsize= 20+int(textWidth(text));
+  TextBox(int _x, int _y) {
+    super(_x, _y);
+    xsize= 20 + int(textWidth(text));
     ysize = 30;
-    
+
     inputSize = 0;
     outputSize = 0;
     setupIO();
@@ -253,7 +251,7 @@ class TextBox extends Component {
     DrawStandardStuff();
     textSize(12);
     fill(0);
-    text(text,x+30,y+20);
+    text(text, x+30, y+20);
     textSize(25);
   }
   void Work() {

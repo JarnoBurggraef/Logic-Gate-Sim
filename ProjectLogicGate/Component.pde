@@ -16,8 +16,9 @@ class Component {
   int[] outputComponentsIndices;
   boolean[] outputs;
   int outputSize;
-  
+
   boolean hidden = false;
+  String text;
 
   Component(int _x, int _y) {
     x = _x;
