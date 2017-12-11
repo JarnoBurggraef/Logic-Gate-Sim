@@ -7,6 +7,7 @@ void mousePressed() {
           writing = true;
           textc.text="noicer";
           println("text clicked!");
+          break;
         }
       }
     }
