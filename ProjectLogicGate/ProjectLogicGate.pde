@@ -137,8 +137,6 @@ void LoadBlockFile(File selection) {
   b.name = nlis[nlis.length-1];
 }
 
-
-
 void save(String name) {
   int acsize=allComponents.size();
   String[] savedObjects = new String[acsize-TOOLBARSIZE];

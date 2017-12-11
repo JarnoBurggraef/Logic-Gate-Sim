@@ -1,10 +1,13 @@
-schalter,114,260,1,9;0
-schalter,126,511,1,10;0
-splitter,232,236,0,11;0,15;0
-splitter,261,480,0,11;1,16;0
-or,498,299,0,13;0
-or,552,568,0,13;1
-and,661,376,0,14;0
-lampe,830,463,1,-1;0
-not,317,324,0,12;0
+schalter,123,377,1,9;0
+schalter,126,498,1,10;0
+splitter,257,344,0,11;0,15;0
+splitter,261,468,0,11;1,16;0
+or,484,294,0,13;0
+or,483,445,0,13;1
+and,635,362,0,14;0
+lampe,756,402,1,-1;0
+not,351,404,0,12;0
 not,369,516,0,12;1
+textBox,267,172,xor,
+textBox,24,229,￿Wenn ￿GENAU ￿EINER der ￿Eingänge wahr ist...,
+textBox,545,577,...dann ist auch der ￿Ausgang wahr￿!,

@@ -132,13 +132,14 @@ void mouseReleased() {
   WorkAllComponents();
 }
 void keyPressed() {
-  if (writing){
+  if (writing) {
     if (key == BACKSPACE) {
       if (((TextBox)textc).text.length() > 0) {
         ((TextBox)textc).text = ((TextBox)textc).text.substring(0, ((TextBox)textc).text.length()-1);
       }
     } else if (key == ENTER) {
       writing = false;
+      save("save.txt");
     } else {
       ((TextBox)textc).text = ((TextBox)textc).text + key;
     }
