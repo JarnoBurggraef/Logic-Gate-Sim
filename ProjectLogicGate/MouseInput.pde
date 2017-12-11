@@ -6,6 +6,7 @@ void mousePressed() {
       for (int j = 0; j<component.outputSize; j++) {
         int[] pos = component.getCableEndPos(j, 1);
         if (inside(pos[0], pos[1], pos[0]+20, pos[1]+20)) {
+          if(component instanceof Lampe)continue;
           drawLine = true;
           linex = mouseX;
           liney = mouseY;

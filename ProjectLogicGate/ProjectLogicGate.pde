@@ -159,7 +159,7 @@ void save(String name) {
     savedObjects[i]=gateType+","+d.x+","+d.y+",";
     String IOState = "0";
     if (d instanceof Lampe)  IOState = ((Lampe)d).isOutputLampe ? "1" : "0";
-    if (d instanceof Schalter)  IOState = ((Schalter)d).isInputSchalter ? "1" : "0";
+    else if (d instanceof Schalter)  IOState = ((Schalter)d).isInputSchalter ? "1" : "0";
     savedObjects[i] += IOState+",";
     //if (gateType != "block"){
     for (int j=0; j<d.outputComponents.length; j++) {
@@ -192,6 +192,7 @@ void load(String name) {
   }
   for ( int i=0; i<read.length; i++) {
     String[] data = split(read[i], ',');
+    //printArray(data);
     Component u = allComponents.get(0);
     switch(data[0]) {
     case "and":
@@ -212,7 +213,7 @@ void load(String name) {
     case "splitter":
       u = new Splitter(int(data[1]), int(data[2])); 
       break;
-      case "textBox":
+    case "textBox":
       u = new Splitter(int(data[1]), int(data[2])); 
       break;
     case "block":
@@ -246,10 +247,9 @@ void load(String name) {
       ((Block)u).name = data[data.length-1];
       end = data.length-2;
     }
-
     for (int  j = 4; j<end; j++) {
       String[] tuple =split(data[j], ";");
-      if (!tuple[0].equals("-1")) {
+      if (int(tuple[0])>=0&&tuple.length>1) {
         u.outputComponents[j-4]=allComponents.get(int(tuple[0]));
         u.outputComponentsIndices[j-4] = int(tuple[1]);
       }
