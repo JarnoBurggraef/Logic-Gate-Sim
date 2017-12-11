@@ -5,6 +5,7 @@ void mousePressed() {
       if (textc instanceof TextBox) {
         if (inside(textc.x, textc.y, textc.x+textc.xsize, textc.y+textc.ysize)) {
           textc.text="yes";
+          println("text clicked!");
         }
       }
     }

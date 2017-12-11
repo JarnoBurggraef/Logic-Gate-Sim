@@ -24,7 +24,7 @@
  textSize(25);
  }
  */
- /*void keyPressed() {
+/*void keyPressed() {
  if (key=='s') {
  save2();
  }
@@ -114,7 +114,7 @@
  }
  }
  }*/
- /*void load() {
+/*void load() {
  try {
  ObjectInputStream ois = new ObjectInputStream(new FileInputStream(path("data.txt")));
  
@@ -127,7 +127,7 @@
  ex.printStackTrace();
  }
  }*/
- /*void draw() {
+/*void draw() {
  clear();
  background(200);
  toolbar();
@@ -150,7 +150,7 @@
  line(linex, liney, mouseX, mouseY);
  }
  }*/
- /*void save() {
+/*void save() {
  FileOutputStream fout = null;
  ObjectOutputStream oos = null;
  

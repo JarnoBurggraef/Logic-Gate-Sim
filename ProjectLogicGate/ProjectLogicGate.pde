@@ -214,7 +214,7 @@ void load(String name) {
       u = new Splitter(int(data[1]), int(data[2])); 
       break;
     case "textBox":
-      u = new Splitter(int(data[1]), int(data[2])); 
+      u = new TextBox(int(data[1]), int(data[2])); 
       break;
     case "block":
       u = new Block(int(data[1]), int(data[2]), new ArrayList<Component>());
@@ -255,6 +255,7 @@ void load(String name) {
       }
     }
   }
+  WorkAllComponents();
 }
 
 void WorkAllComponents() {

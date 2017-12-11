@@ -1,15 +1,15 @@
 import java.util.function.Function;
-class Button{
+class Button {
   int x;
   int y;
-  
+
   int bheight;
   int bwidth;
-  
+
   String label;
-  
+
   //Function action;
-  public Button(int x, int y, int bwidth, int bheight, String label){
+  public Button(int x, int y, int bwidth, int bheight, String label) {
     //this.action = _action;
     this.x = x;
     this.y = y;
@@ -17,22 +17,22 @@ class Button{
     this.bwidth = bwidth;
     this.label = label;
   }
-  
-  void Draw(){
+
+  void Draw() {
     fill(255);
     stroke(50);
-    rect(x,y,bwidth,bheight);
+    rect(x, y, bwidth, bheight);
     textSize(12);
     fill(0);
-    text(label,x+5,y+15);
+    text(label, x+5, y+15);
     textSize(25);
   }
-  
-  boolean mouseOverButton(){
+
+  boolean mouseOverButton() {
     return mouseX >= this.x && mouseX <= this.x+this.bwidth && mouseY>=this.y && mouseY<=this.y+this.bheight;
   }
-  
+
   /*void DoAction(){
-    this.action.apply(null);
-  }*/
+   this.action.apply(null);
+   }*/
 }  

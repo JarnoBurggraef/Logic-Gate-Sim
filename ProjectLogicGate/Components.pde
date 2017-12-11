@@ -233,14 +233,14 @@ class Splitter extends Component {
 
 class TextBox extends Component {
 
-  String text = "";
+  String text = "?";
 
   TextBox() {
     this(0, 0);
   }
   TextBox(int _x, int _y) {
     super(_x, _y);
-    xsize= 20 + int(textWidth(text));
+    xsize= 30 + int(textWidth(text));
     ysize = 30;
 
     inputSize = 0;
@@ -249,9 +249,9 @@ class TextBox extends Component {
   }
   void Paint() {
     DrawStandardStuff();
-    textSize(12);
+    textSize(25);
     fill(0);
-    text(text, x+30, y+20);
+    text(text, x+10, y+25);
     textSize(25);
   }
   void Work() {
