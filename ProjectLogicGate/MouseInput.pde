@@ -134,13 +134,13 @@ void mouseReleased() {
 void keyPressed() {
   if (writing){
     if (key == BACKSPACE) {
-      if (textc.text.length() > 0) {
-        textc.text = textc.text.substring(0, textc.text.length()-1);
+      if (((TextBox)textc).text.length() > 0) {
+        ((TextBox)textc).text = ((TextBox)textc).text.substring(0, ((TextBox)textc).text.length()-1);
       }
     } else if (key == ENTER) {
       writing = false;
     } else {
-      ((TextBox)textc).text = textc.text + key;
+      ((TextBox)textc).text = ((TextBox)textc).text + key;
     }
   }
 }
