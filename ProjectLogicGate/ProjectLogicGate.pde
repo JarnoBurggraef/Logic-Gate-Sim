@@ -1,6 +1,6 @@
-Component activeComponent;
+Component activeComponent, textc;
 int mouseXoff, mouseYoff, lockedItem, lineStartIndex, linex, liney;
-boolean locked, drawLine, changed;
+boolean locked, drawLine, changed,writing;
 Component lineStart;
 ArrayList<Component> allComponents = new ArrayList<Component>();
 //ArrayList<Button> allButtons = new ArrayList<Button>();

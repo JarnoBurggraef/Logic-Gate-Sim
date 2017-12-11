@@ -4,9 +4,9 @@ void mousePressed() {
       Component textc = allComponents.get(i);
       if (textc instanceof TextBox) {
         if (inside(textc.x, textc.y, textc.x+textc.xsize, textc.y+textc.ysize)) {
-          textc.text="nice";
+          writing = true;
+          textc.text="noicer";
           println("text clicked!");
-          continue;
         }
       }
     }
@@ -129,4 +129,15 @@ void mouseReleased() {
   }
   save("save.txt");
   WorkAllComponents();
+}
+void keyPressed() {
+  if (key == BACKSPACE) {
+    if (textc.text.length() > 0) {
+      textc.text = textc.text.substring(0, textc.text.length()-1);
+    }
+  } else if (key == ENTER) {
+    writing = false;
+  } else {
+    textc.text = textc.text + key;
+  }
 }
