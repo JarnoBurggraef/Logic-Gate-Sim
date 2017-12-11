@@ -246,6 +246,7 @@ class TextBox extends Component {
     inputSize = 0;
     outputSize = 0;
     setupIO();
+    text = "";
   }
   void Paint() {
     xsize= 20 + int(textWidth(text));
@@ -254,7 +255,7 @@ class TextBox extends Component {
     fill(0);
     println(text);
     text(text, x+10, y+25);
-    //textSize(25);
+    textSize(25);
   }
   void Work() {
   }

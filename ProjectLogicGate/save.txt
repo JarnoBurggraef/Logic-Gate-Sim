@@ -12,4 +12,4 @@ block,394,279,0,20;0,7;8;9;10;11;12;13;14;15;16,XOR.txt
 schalter,180,377,1,17;0
 schalter,227,505,1,17;1
 lampe,623,346,1,-1;0
-textBox,634,497,noicer,
+textBox,634,497,null,

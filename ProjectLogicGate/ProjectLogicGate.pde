@@ -228,7 +228,7 @@ void load(String name) {
     } else if (u instanceof Schalter) {
       ((Schalter)u).isInputSchalter = data[3]=="0" ? false : true;
     } else if (u instanceof TextBox) {
-      ((TextBox)u).text = data[3];
+      ((TextBox)u).text = data[3]==null ? "" : data[3];
     }
   }
 

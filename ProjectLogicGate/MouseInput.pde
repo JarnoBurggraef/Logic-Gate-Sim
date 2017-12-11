@@ -5,7 +5,7 @@ void mousePressed() {
       if (textc instanceof TextBox) {
         if (inside(textc.x, textc.y, textc.x+textc.xsize, textc.y+textc.ysize)) {
           writing = true;
-          textc.text="noicer";
+          //textc.text="noicer";
           println("text clicked!");
           break;
         }
@@ -132,14 +132,15 @@ void mouseReleased() {
   WorkAllComponents();
 }
 void keyPressed() {
-  if (key == BACKSPACE) {
-    if (textc.text.length() > 0) {
-      textc.text = textc.text.substring(0, textc.text.length()-1);
+  if (writing){
+    if (key == BACKSPACE) {
+      if (textc.text.length() > 0) {
+        textc.text = textc.text.substring(0, textc.text.length()-1);
+      }
+    } else if (key == ENTER) {
+      writing = false;
+    } else {
+      ((TextBox)textc).text = textc.text + key;
     }
-  } else if (key == ENTER) {
-    writing = false;
-  } else {
-    println(textc);
-    ((TextBox)textc).text = textc.text + key;
   }
 }
