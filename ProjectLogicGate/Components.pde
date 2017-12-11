@@ -251,8 +251,8 @@ class TextBox extends Component {
     DrawStandardStuff();
     textSize(25);
     fill(0);
-    text(text, x+10, y+25);
-    textSize(25);
+    text(this.text, x+10, y+25);
+    //textSize(25);
   }
   void Work() {
   }

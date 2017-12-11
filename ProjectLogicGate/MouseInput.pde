@@ -4,8 +4,9 @@ void mousePressed() {
       Component textc = allComponents.get(i);
       if (textc instanceof TextBox) {
         if (inside(textc.x, textc.y, textc.x+textc.xsize, textc.y+textc.ysize)) {
-          textc.text="yes";
+          textc.text="nice";
           println("text clicked!");
+          continue;
         }
       }
     }
@@ -68,6 +69,7 @@ void mousePressed() {
     }
   }
 }
+
 
 boolean inside(int minx, int  miny, int maxx, int maxy) {
   if (minx<mouseX && mouseX<maxx) {

@@ -160,6 +160,7 @@ void save(String name) {
     String IOState = "0";
     if (d instanceof Lampe)  IOState = ((Lampe)d).isOutputLampe ? "1" : "0";
     else if (d instanceof Schalter)  IOState = ((Schalter)d).isInputSchalter ? "1" : "0";
+    else if (d instanceof TextBox)  IOState = d.text;
     savedObjects[i] += IOState+",";
     //if (gateType != "block"){
     for (int j=0; j<d.outputComponents.length; j++) {
@@ -226,6 +227,8 @@ void load(String name) {
       ((Lampe)u).isOutputLampe = data[3]=="0" ? false : true;
     } else if (u instanceof Schalter) {
       ((Schalter)u).isInputSchalter = data[3]=="0" ? false : true;
+    } else if (u instanceof TextBox) {
+      ((TextBox)u).text = data[3];
     }
   }
 
