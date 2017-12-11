@@ -158,7 +158,7 @@ void save(String name) {
     String IOState = "0";
     if (d instanceof Lampe)  IOState = ((Lampe)d).isOutputLampe ? "1" : "0";
     else if (d instanceof Schalter)  IOState = ((Schalter)d).isInputSchalter ? "1" : "0";
-    else if (d instanceof TextBox)  IOState = d.text;
+    else if (d instanceof TextBox)  IOState = ((TextBox)d).text;
     savedObjects[i] += IOState+",";
     //if (gateType != "block"){
     for (int j=0; j<d.outputComponents.length; j++) {
