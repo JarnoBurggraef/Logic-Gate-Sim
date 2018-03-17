@@ -38,8 +38,10 @@ class Block extends Component  {
     DrawStandardStuff();
     textSize(12);
     fill(0);
-    text(name, x+30, y+20);
+    textAlign(CENTER);
+    text(name, x+xsize/2, y+20);
     textSize(25);
+    textAlign(LEFT);
   }
   void Work() {
     int i = 0;

@@ -117,6 +117,8 @@ void mouseReleased() {
     Load();
   } else if (LoadBlockBtn.mouseOverButton()) {
     LoadBlock();
+  } else if (CreateTabBtn.mouseOverButton()){
+    SaveTabelle();
   }
   for (Component c : allComponents) {
     if (c.toolbar) continue;

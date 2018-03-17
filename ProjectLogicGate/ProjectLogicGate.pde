@@ -8,6 +8,7 @@ Button NewBtn;
 Button SaveToBtn;
 Button LoadBlockBtn;
 Button LoadBtn;
+Button CreateTabBtn;
 
 int TOOLBARSIZE = 0;
 
@@ -24,10 +25,11 @@ void setup() {
   SaveToBtn = new Button(width-100, 250, 70, 30, "Save To");
   LoadBtn = new Button(width-100, 300, 70, 30, "Load");
   LoadBlockBtn = new Button(width-100, 350, 70, 30, "Load Block");
+  CreateTabBtn = new Button(width-100, 400, 70, 30, "Tabelle");
 }
 void SetupToolbar() {
   Component t = new AndGate(20, 20);
-  t.toolbar = true;
+  t.toolbar = true;                  
   t = new OrGate(140, 20);
   t.toolbar = true;
   t = new NotGate(260, 20);
@@ -282,6 +284,25 @@ void DrawAllComponents() {
   }
 }
 
+ArrayList<Component> getInputs(){
+  ArrayList<Component> inputs = new ArrayList<Component>();
+  for (Component c : allComponents){
+    if (c instanceof Schalter && !c.hidden && !c.toolbar){
+        inputs.add(c);
+    }
+  }
+  return inputs;
+}
+ArrayList<Component> getOutputs(){
+  ArrayList<Component> outputs = new ArrayList<Component>();
+  for (Component c : allComponents){
+    if (c instanceof Lampe && !c.hidden && !c.toolbar){
+        outputs.add(c);
+    }
+  }
+  return outputs;
+}
+
 void draw() {
   clear();
   background(200);
@@ -292,6 +313,7 @@ void draw() {
   SaveToBtn.Draw();
   LoadBtn.Draw();
   LoadBlockBtn.Draw();
+  CreateTabBtn.Draw();
 
   if (locked) {
     activeComponent.x = mouseX-mouseXoff;
