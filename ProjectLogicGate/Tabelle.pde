@@ -9,7 +9,6 @@ void SaveTab(File selection) {
     int ins = inputs.size();;
     ArrayList<Component> outputs = getOutputs();
     int outs = outputs.size();
-    println(outs);
     
     String[] data = new String[(int)pow(2,ins)+1];
     data[0] = "n | ";

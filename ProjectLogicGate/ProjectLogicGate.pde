@@ -135,7 +135,10 @@ void LoadBlockFile(File selection) {
     }
   }
   Block b = new Block(width/2, height/2, blockComponents);
-  String[] nlis = selection.getAbsolutePath().split("/");
+  String splitter = "\\";
+  if (selection.getAbsolutePath().contains("/")) 
+    splitter = "/";
+  String[] nlis = selection.getAbsolutePath().split(splitter);
   b.name = nlis[nlis.length-1];
 }
 
