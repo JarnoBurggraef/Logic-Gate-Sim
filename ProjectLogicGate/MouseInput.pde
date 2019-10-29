@@ -36,7 +36,6 @@ void mousePressed() {
         }
       }
 
-      //////////////////////////////
       if (inside(component.x, component.y, component.x+component.xsize, component.y+component.ysize)) {
         locked = true;
         if (component.toolbar) {
@@ -70,7 +69,6 @@ void mousePressed() {
     }
   }
 }
-
 
 boolean inside(int minx, int  miny, int maxx, int maxy) {
   if (minx<mouseX && mouseX<maxx) {
@@ -131,8 +129,9 @@ void mouseReleased() {
     }
   }
   save("save.txt");
-  WorkAllComponents();
+  workAllComponents();
 }
+
 void keyPressed() {
   if (writing) {
     if (key == BACKSPACE) {

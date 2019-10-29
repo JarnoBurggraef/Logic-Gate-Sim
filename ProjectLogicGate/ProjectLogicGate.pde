@@ -1,21 +1,18 @@
-Component activeComponent, textc;
 int mouseXoff, mouseYoff, lockedItem, lineStartIndex, linex, liney;
-boolean locked, drawLine, changed,writing;
+int toolbarSize = 0;
+boolean locked, drawLine, changed, writing;
+boolean loadData = true;
 Component lineStart;
+Component activeComponent, textc;
 ArrayList<Component> allComponents = new ArrayList<Component>();
-//ArrayList<Button> allButtons = new ArrayList<Button>();
 Button NewBtn;
 Button SaveToBtn;
 Button LoadBlockBtn;
 Button LoadBtn;
 Button CreateTabBtn;
 
-int TOOLBARSIZE = 0;
-
-boolean loadData = true;
 void setup() {
   size(1000, 800);
-  //SetupToolbar();
   if (loadData) {
     load("save.txt");
   } 
@@ -43,11 +40,12 @@ void SetupToolbar() {
   t = new TextBox(740, 20);
   t.toolbar = true;
 
-  TOOLBARSIZE = 0;
+  toolbarSize = 0;
   for (Component c : allComponents) {
-    if (c.toolbar) TOOLBARSIZE ++;
+    if (c.toolbar) toolbarSize ++;
   }
 }
+
 void New() {
   allComponents = new ArrayList<Component>();
   SetupToolbar();
@@ -56,6 +54,7 @@ void New() {
 void SaveTo() {
   selectOutput("Select a location to save", "SaveToOut");
 }
+
 void SaveToOut(File selection) {
   if (selection!=null) {
     save(selection.getAbsolutePath());
@@ -65,6 +64,7 @@ void SaveToOut(File selection) {
 void Load() {
   selectInput("Select a file", "LoadFile");
 }
+
 void LoadFile(File selection) {
   if (selection != null) {
     load(selection.getAbsolutePath());
@@ -74,6 +74,7 @@ void LoadFile(File selection) {
 void LoadBlock() {
   selectInput("Select a file", "LoadBlockFile");
 }
+
 void LoadBlockFile(File selection) {
   if (selection==null) return;
   String[] read;
@@ -129,7 +130,7 @@ void LoadBlockFile(File selection) {
     for (int  j = 4; j<data.length; j++) {
       String[] tuple =split(data[j], ";");
       if (!tuple[0].equals("-1")) {
-        u.outputComponents[j-4]=blockComponents.get(int(tuple[0])-TOOLBARSIZE);
+        u.outputComponents[j-4]=blockComponents.get(int(tuple[0])-toolbarSize);
         u.outputComponentsIndices[j-4] = int(tuple[1]);
       }
     }
@@ -144,12 +145,12 @@ void LoadBlockFile(File selection) {
 
 void save(String name) {
   int acsize=allComponents.size();
-  String[] savedObjects = new String[acsize-TOOLBARSIZE];
+  String[] savedObjects = new String[acsize-toolbarSize];
   String gateType = "";
   for (int ci=0; ci<acsize; ci++) {
     Component d = allComponents.get(ci);
     if (d.toolbar) continue;
-    int i = ci-TOOLBARSIZE;
+    int i = ci-toolbarSize;
 
     if (d instanceof Splitter) gateType="splitter";
     else if (d instanceof AndGate)  gateType="and";
@@ -165,7 +166,6 @@ void save(String name) {
     else if (d instanceof Schalter)  IOState = ((Schalter)d).isInputSchalter ? "1" : "0";
     else if (d instanceof TextBox)  IOState = ((TextBox)d).text;
     savedObjects[i] += IOState+",";
-    //if (gateType != "block"){
     for (int j=0; j<d.outputComponents.length; j++) {
       int index = d.outputComponents[j] == null ? -1 : allComponents.indexOf(d.outputComponents[j]);
       savedObjects[i] += index + ";"+d.outputComponentsIndices[j];
@@ -237,7 +237,7 @@ void load(String name) {
 
   for ( int i=0; i<read.length; i++) {
     String[] data = split(read[i], ',');
-    Component u = allComponents.get(i+TOOLBARSIZE);
+    Component u = allComponents.get(i+toolbarSize);
     int end = data.length;
     if (u instanceof Block) {
       String[] innerC = split(data[data.length-2], ";");
@@ -261,10 +261,10 @@ void load(String name) {
       }
     }
   }
-  WorkAllComponents();
+  workAllComponents();
 }
 
-void WorkAllComponents() {
+void workAllComponents() {
   for (Component c : allComponents) {
     if (c instanceof Schalter) {
       c.Work();
@@ -276,31 +276,31 @@ void toolbar() {
   rect(0, 0, width, 160);
 }
 
-void DrawAllComponents() {
+void drawAllComponents() {
   for (Component c : allComponents) {
     if (!c.hidden)
       c.Paint();
   }
   for (Component c : allComponents) {
     if (!c.hidden)
-      c.DrawCables();
+      c.drawCables();
   }
 }
 
-ArrayList<Component> getInputs(){
+ArrayList<Component> getInputs() {
   ArrayList<Component> inputs = new ArrayList<Component>();
-  for (Component c : allComponents){
-    if (c instanceof Schalter && !c.hidden && !c.toolbar){
-        inputs.add(c);
+  for (Component c : allComponents) {
+    if (c instanceof Schalter && !c.hidden && !c.toolbar) {
+      inputs.add(c);
     }
   }
   return inputs;
 }
-ArrayList<Component> getOutputs(){
+ArrayList<Component> getOutputs() {
   ArrayList<Component> outputs = new ArrayList<Component>();
-  for (Component c : allComponents){
-    if (c instanceof Lampe && !c.hidden && !c.toolbar){
-        outputs.add(c);
+  for (Component c : allComponents) {
+    if (c instanceof Lampe && !c.hidden && !c.toolbar) {
+      outputs.add(c);
     }
   }
   return outputs;
@@ -311,12 +311,12 @@ void draw() {
   background(200);
   toolbar();
 
-  DrawAllComponents();
-  NewBtn.Draw();
-  SaveToBtn.Draw();
-  LoadBtn.Draw();
-  LoadBlockBtn.Draw();
-  CreateTabBtn.Draw();
+  drawAllComponents();
+  NewBtn.draw();
+  SaveToBtn.draw();
+  LoadBtn.draw();
+  LoadBlockBtn.draw();
+  CreateTabBtn.draw();
 
   if (locked) {
     activeComponent.x = mouseX-mouseXoff;

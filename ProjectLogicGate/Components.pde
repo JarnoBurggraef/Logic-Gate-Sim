@@ -6,6 +6,7 @@ class Block extends Component {
   public Block() {
     this(0, 0, new ArrayList<Component>());
   }
+  
   public Block(int _x, int _y, ArrayList<Component> _innerComponents) {
     super(_x, _y);
 
@@ -19,6 +20,7 @@ class Block extends Component {
 
     loadIO();
   }
+  
   void loadIO() {
     for (Component c : innerComponents) {
       if (c instanceof Schalter) {
@@ -35,7 +37,7 @@ class Block extends Component {
   }
 
   void Paint() {
-    DrawStandardStuff();
+    drawStandardStuff();
     textSize(12);
     fill(0);
     textAlign(CENTER);
@@ -43,6 +45,7 @@ class Block extends Component {
     textSize(25);
     textAlign(LEFT);
   }
+  
   void Work() {
     int i = 0;
     for (Component c : this.innerComponents) {
@@ -83,7 +86,7 @@ class AndGate extends Component {
     setupIO();
   }
   void Paint() {
-    DrawStandardStuff();
+    drawStandardStuff();
     fill(0);
     text("&", x+40, y+70);
   }
@@ -109,7 +112,7 @@ class OrGate extends Component {
   }
 
   void Paint() {
-    DrawStandardStuff();
+    drawStandardStuff();
     fill(0);
     text(">=1", x+15, y+70);
   }
@@ -136,7 +139,7 @@ class NotGate extends Component {
   }
 
   void Paint() {
-    DrawStandardStuff();
+    drawStandardStuff();
     fill(0);
     text("!", x+45, y+25);
   }
@@ -168,7 +171,7 @@ class Schalter extends Component {
       fill(color(255, 255, 0));
       rect(x-2, y-2, xsize+4, ysize+4);
     }
-    DrawStandardStuff();
+    drawStandardStuff();
     if (inputs[0])fill(0, 255, 0);
     else fill(255, 0, 0);
     rect(x+5, y+5, 40, 20);
@@ -200,7 +203,7 @@ class Lampe extends Component {
       fill(color(255, 255, 0));
       rect(x-2, y-2, xsize+4, ysize+4);
     }
-    DrawStandardStuff();
+    drawStandardStuff();
     if (outputs[0])fill(0, 255, 0);
     else fill(255, 0, 0);
     rect(x+30, y+5, 50, 50);
@@ -210,6 +213,7 @@ class Lampe extends Component {
     outputs[0] = inputs[0];
   }
 }
+
 class Splitter extends Component {
   Splitter() {
     this(0, 0);
@@ -224,7 +228,7 @@ class Splitter extends Component {
     setupIO();
   }
   void Paint() {
-    DrawStandardStuff();
+    drawStandardStuff();
   }
   void Work() {
     outputs[0] = inputs[0];
@@ -252,7 +256,7 @@ class TextBox extends Component {
   }
   void Paint() {
     xsize= 20 + int(textWidth(text));
-    DrawStandardStuff();
+    drawStandardStuff();
     textSize(25);
     fill(0);
     //println(text);

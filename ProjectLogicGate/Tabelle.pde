@@ -1,13 +1,13 @@
 void SaveTabelle() {
   selectOutput("Select a location to save", "SaveTab");
 }
+
 void SaveTab(File selection) {
   if (selection!=null) {
     String path = selection.getAbsolutePath();
 
     ArrayList<Component> inputs = getInputs();
     int ins = inputs.size();
-    ;
     ArrayList<Component> outputs = getOutputs();
     int outs = outputs.size();
 
@@ -34,7 +34,7 @@ void SaveTab(File selection) {
       for (int k = 0; k<ins; k++) {
         inputs.get(k).inputs[0] = bins[i][k]==1 ? true : false;
       }
-      WorkAllComponents();
+      workAllComponents();
       data[j] += " ";
       for (int k = 0; k<outs; k++) {
         data[j] += str(outputs.get(k).outputs[0] ? 1 : 0 );
@@ -43,7 +43,6 @@ void SaveTab(File selection) {
         }
       }
     }
-
     saveStrings(path, data);
   }
 }

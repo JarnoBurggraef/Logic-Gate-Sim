@@ -1,23 +1,14 @@
-
-
 class Component {
   int x, y, xsize, ysize;
-
-  boolean isMoving = false;
-
-  boolean toolbar = false;
-
-  //Component[] inputComponents;
-  boolean[] inputs;
-  int inputSize;
-
-
-  Component[] outputComponents;
-  int[] outputComponentsIndices;
-  boolean[] outputs;
-  int outputSize;
-
   boolean hidden = false;
+  boolean isMoving = false;
+  boolean toolbar = false;
+  boolean[] inputs;
+  boolean[] outputs;
+  int[] outputComponentsIndices;
+  int inputSize;
+  int outputSize;
+  Component[] outputComponents;
   String text;
 
   Component(int _x, int _y) {
@@ -27,6 +18,7 @@ class Component {
       allComponents.add(this);
     }
   }
+  
   Component() {
     this(0, 0);
   }
@@ -34,7 +26,8 @@ class Component {
   int getEdgeColor() {
     return isMoving ? color(255, 0, 0) : color(0);
   }
-  void DrawBackground() {
+  
+  void drawBackground() {
     fill(255);
     stroke(getEdgeColor());
     rect(x, y, xsize, ysize);
@@ -46,9 +39,9 @@ class Component {
   void Work() {
   }
 
-  void DrawStandardStuff() {
-    DrawBackground();
-    DrawIO();
+  void drawStandardStuff() {
+    drawBackground();
+    drawIO();
   }
 
   int[] getCableEndPos(int index, int row) {
@@ -57,7 +50,7 @@ class Component {
     return new int[]{_x, _y};
   }
 
-  void DrawIO() {
+  void drawIO() {
     fill(255);
     stroke(getEdgeColor());
     for (int i = 0; i<inputSize; i++) {
@@ -70,7 +63,7 @@ class Component {
       rect(pos[0], pos[1], 20, 20);
     }
   }
-  void DrawCables() {
+  void drawCables() {
     for (int i = 0; i<outputComponents.length; i++) {
       if (outputs[i]) {
         stroke(255, 30, 10);
@@ -96,7 +89,6 @@ class Component {
   }
 
   void setupIO() {
-    //inputComponents = new Component[inputSize];
     inputs = new boolean[inputSize];
     outputComponents = new Component[outputSize];
     outputs = new boolean[outputSize];  
