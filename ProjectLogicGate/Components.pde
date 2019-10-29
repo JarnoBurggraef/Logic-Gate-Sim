@@ -1,4 +1,4 @@
-class Block extends Component  {
+class Block extends Component {
 
   ArrayList<Component> innerComponents = new ArrayList<Component>();
   String name;
